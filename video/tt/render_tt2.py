@@ -8,10 +8,16 @@ F='/usr/share/fonts/opentype/noto/NotoSansCJK-Black.ttc'
 CX=505          # 右のアイコン列を避けて少し左寄せ
 MAXW=860
 BOTTOM=1430     # ここより下はTikTokの名前・説明文エリア
-TITLES={3:'格闘技オーディションに乱入',4:'金髪ファイターと因縁勃発',5:'プロの拳を全部よける男',6:'銭湯のおばあちゃんが泣いた理由',
+OLD={3:'格闘技オーディションに乱入',4:'金髪ファイターと因縁勃発',5:'プロの拳を全部よける男',6:'銭湯のおばあちゃんが泣いた理由',
  7:'ガリガリ男、58秒でKO',8:'KOした翌日、宿敵が動いた',9:'最強の男、80歳に完敗',10:'会長の正体は47年前の宿敵',
  11:'47年前の約束、相手はハルさん',12:'47年、雨の中で待っていた人',13:'昭和の男、令和のジムで吹っ飛ぶ',
- 14:'昭和の男、ネカフェで力尽きる',15:'ハルさんの指に、あの日の指輪',2:'令和のコンビニで大事件'}
+ 14:'昭和の男、ネカフェで力尽きる',15:'ハルさんの指に、あの日の指輪'}
+TITLES={2:'令和のコンビニで大事件',3:'チンピラ瞬殺、まさかのスカウト'}
+TITLES.update({k+1:v for k,v in OLD.items()})
+import datetime
+def fname(n,suffix=''):
+    d=datetime.date(2026,10,20)+datetime.timedelta(days=n)
+    return f'{d.isoformat()}_tiktok{n}{suffix}.mp4'
 f_small=ImageFont.truetype(F,40); f_title=ImageFont.truetype(F,58)
 def fit(d,t,size):
     while True:
@@ -34,6 +40,15 @@ def subs(d,lines,shown,size=74,lh=106):
         last=(k==len(lines)-1 and len(shown)==len(lines) and len(lines)>1)
         d.text((CX-tw/2,y),L,font=f,fill=(255,236,150) if last else 'white',stroke_width=8,stroke_fill='black')
         y+=lh
+def endcard(last,p):
+    im=last.filter(ImageFilter.GaussianBlur(14))
+    from PIL import ImageEnhance
+    im=ImageEnhance.Brightness(im).enhance(0.4); d=ImageDraw.Draw(im)
+    for t,y,sz,c in [('続きは',1000,96,'white'),('フォローして',1120,110,(255,200,60)),('待っとけ',1260,110,'white')]:
+        f=ImageFont.truetype(F,sz);w=d.textlength(t,font=f)
+        d.text((CX-w/2,y),t,font=f,fill=c,stroke_width=9,stroke_fill='black')
+    b=im.tobytes()
+    for _ in range(2*FPS): p.stdin.write(b)
 def pipe(out):
     return subprocess.Popen(['ffmpeg','-y','-f','rawvideo','-pix_fmt','rgb24','-s',f'{W}x{H}','-r',str(FPS),'-i','-','-c:v','libx264','-pix_fmt','yuv420p','-crf','18','-movflags','+faststart',out],stdin=subprocess.PIPE,stderr=subprocess.DEVNULL)
 
@@ -41,7 +56,7 @@ def reel(n,script):
     src_code=open(S+script).read()
     P=re.search(r"P='([^']+)'",src_code).group(1)
     shots=eval(re.search(r"shots=(\[.*?\])\n",src_code,re.S).group(1),{'P':P})
-    out=re.search(r"'(/home/claude/showa-tetsuo-media/video/[^']+\.mp4)'",src_code).group(1).split('/')[-1]
+    out=fname(n)
     p=pipe(OUT+out); SEC=6
     for f,ax,lines in shots:
         src=Image.open(f).convert('RGB'); nfr=SEC*FPS
@@ -56,6 +71,7 @@ def reel(n,script):
             shown=lines[:1+min(len(lines)-1,int(i/(nfr/len(lines))))]
             subs(d,lines,shown)
             p.stdin.write(fr.tobytes())
+    if n>=3: endcard(fr,p)
     p.stdin.close(); p.wait(); print('done',out)
 
 def fight():
@@ -64,7 +80,7 @@ def fight():
     shots=[(P+'entrance.png',0.45,6,['預かっとけ、ユウト','ここから先は','素顔で行く'],'entrance'),
            (P+'ko.png',0.95,6,['昭和ゲンコツ','一発！'],'ko'),
            (P+'victory.png',0.4,7,['令和のヒヨッコども','見たか','ナウいねぇ'],'win')]
-    p=pipe(OUT+'2026-10-27_tiktok7_fight.mp4')
+    p=pipe(OUT+fname(8,'_fight'))
     for f,ax,sec,lines,kind in shots:
         src=Image.open(f).convert('RGB'); nfr=sec*FPS
         for i in range(nfr):
@@ -77,7 +93,7 @@ def fight():
                 cx=max(0,min(cx,im.width-W)); cy=max(0,min(cy,im.height-H))
             fr=im.crop((cx,cy,cx+W,cy+H))
             if kind=='ko' and i<5: fr=Image.blend(fr,Image.new('RGB',(W,H),'white'),1-i/5)
-            fr=fr.convert('RGBA'); fr.alpha_composite(band(7)); fr=fr.convert('RGB')
+            fr=fr.convert('RGBA'); fr.alpha_composite(band(8)); fr=fr.convert('RGB')
             d=ImageDraw.Draw(fr)
             d.rectangle((40,215,300,275),fill=(170,20,20)); d.text((60,221),'鉄檻 TEKKAN',font=sm,fill='white')
             d.rectangle((300,215,420,275),fill=(0,0,0)); d.text((318,221),'LIVE',font=sm,fill=(255,60,60))
@@ -91,10 +107,13 @@ def fight():
             shown=lines[:1+min(len(lines)-1,int(i/(nfr/len(lines))))]
             subs(d,lines,shown)
             p.stdin.write(fr.tobytes())
+    endcard(fr,p)
     p.stdin.close(); p.wait(); print('done fight')
 
 if __name__=='__main__':
     for a in sys.argv[1:]:
         n=int(a)
-        if n==7: fight()
-        else: reel(n,f'reel{n}.py')
+        if n==8: fight()
+        elif n==3: reel(3,'reel_scout.py')
+        elif n==2: reel(2,'reel2.py')
+        else: reel(n,f'reel{n-1}.py')
