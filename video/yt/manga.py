@@ -11,25 +11,50 @@ def vtext_size(lines,f,gap=14):
     cw=f.size+gap
     return cw*len(lines), max(hs)
 
+FW=str.maketrans('0123456789','０１２３４５６７８９')
+def split_cols(lines,maxc=8):
+    lines=[L.translate(FW) for L in lines]
+    out=[]
+    for L in lines:
+        while len(L)>maxc and len(L)-maxc>2:
+            cut=maxc
+            for sep in '、。！？…':
+                i=L.rfind(sep,2,maxc+1)
+                if i>0: cut=i+1; break
+            out.append(L[:cut]); L=L[cut:]
+        if L: out.append(L)
+    return out
 def bubble(img, lines, box_xy, tail, kind='round', size=60, sfx=False):
     """lines: columns right->left. box_xy: center of bubble. tail: (x,y) point."""
+    lines=split_cols(lines)
     f=ImageFont.truetype(F if kind=='shout' else FB,size)
     tw,th=vtext_size(lines,f)
     cx,cy=box_xy
     pw,ph=tw*0.62+50, th*0.62+60
+    if kind=='shout': mx,my=pw*1.25+12,ph*1.18+12
+    else: mx,my=pw+12,ph+12
+    cx=min(max(cx,mx+8),W-mx-8); cy=min(max(cy,my+8),1500-my)
     lay=Image.new('RGBA',img.size,(0,0,0,0)); d=ImageDraw.Draw(lay)
     if kind=='shout':
         pts=[]; n=26
         for i in range(n):
             a=2*math.pi*i/n; r=1.0 if i%2==0 else 0.78
             pts.append((cx+math.cos(a)*pw*r*1.25, cy+math.sin(a)*ph*r*1.18))
-        # tail
-        d.polygon([(cx-pw*0.25,cy+ph*0.5),(tail[0],tail[1]),(cx+pw*0.1,cy+ph*0.6)],fill='white',outline='black')
+        ang=math.atan2(tail[1]-cy,tail[0]-cx)
+        ex,ey=cx+math.cos(ang)*pw*1.1,cy+math.sin(ang)*ph*1.05
+        L=math.hypot(tail[0]-ex,tail[1]-ey); cap=110
+        if L>cap: tail=(ex+(tail[0]-ex)*cap/L, ey+(tail[1]-ey)*cap/L)
+        px,py=-math.sin(ang),math.cos(ang)
+        bx0,by0=cx+math.cos(ang)*pw*0.7,cy+math.sin(ang)*ph*0.7
+        d.polygon([(bx0+px*30,by0+py*30),tail,(bx0-px*30,by0-py*30)],fill='white',outline='black',width=6)
         d.polygon(pts,fill='white',outline='black',width=7)
     else:
         bx=(cx-pw,cy-ph,cx+pw,cy+ph)
         # tail first (outline), then ellipse covers base
         ang=math.atan2(tail[1]-cy,tail[0]-cx); px,py=-math.sin(ang),math.cos(ang)
+        ex,ey=cx+math.cos(ang)*pw,cy+math.sin(ang)*ph
+        L=math.hypot(tail[0]-ex,tail[1]-ey); cap=110
+        if L>cap: tail=(ex+(tail[0]-ex)*cap/L, ey+(tail[1]-ey)*cap/L)
         bxp,byp=cx+math.cos(ang)*pw*0.8,cy+math.sin(ang)*ph*0.8
         tri=[(bxp+px*28,byp+py*28),(tail[0],tail[1]),(bxp-px*28,byp-py*28)]
         d.polygon(tri,fill='black');
@@ -42,6 +67,18 @@ def bubble(img, lines, box_xy, tail, kind='round', size=60, sfx=False):
     for i,L in enumerate(lines):
         bb=d.textbbox((0,0),L,font=f,direction='ttb',features=['vert'])
         d.text((x0-i*cw, cy-bb[3]/2),L,font=f,fill='black',direction='ttb',features=['vert'])
+    img.alpha_composite(lay)
+
+def caption(img,lines,xy,size=50):
+    lines=split_cols(lines,8)
+    f=ImageFont.truetype(FB,size); tw,th=vtext_size(lines,f)
+    bw,bh=tw+40,th+50
+    x0=min(max(xy[0]-bw/2,14),W-bw-14); y0=min(max(xy[1]-bh/2,14),1500-bh)
+    lay=Image.new('RGBA',img.size,(0,0,0,0)); d=ImageDraw.Draw(lay)
+    d.rectangle((x0,y0,x0+bw,y0+bh),fill=(255,255,250),outline='black',width=6)
+    cw=f.size+14; xr=x0+bw-20-cw
+    for i,L in enumerate(lines):
+        d.text((xr-i*cw+7,y0+25),L,font=f,fill='black',direction='ttb',features=['vert'])
     img.alpha_composite(lay)
 
 def sfx(img,text,xy,size=170,angle=-12,color=(255,230,40)):
@@ -70,10 +107,10 @@ def frame_of(src,ax,z):
     cx=int((im.width-W)*ax); cy=int((im.height-H)*0.15)
     return im.crop((cx,cy,cx+W,cy+H)).convert('RGBA')
 
-def render(shots,out,title_band=None,SEC=6):
+def render(shots,out,title_band=None,SEC=6,secs=None):
     p=subprocess.Popen(['ffmpeg','-y','-f','rawvideo','-pix_fmt','rgb24','-s',f'{W}x{H}','-r',str(FPS),'-i','-','-c:v','libx264','-pix_fmt','yuv420p','-crf','18','-movflags','+faststart',out],stdin=subprocess.PIPE,stderr=subprocess.DEVNULL)
     for sh in shots:
-        src=Image.open(sh['img']).convert('RGB'); n=SEC*FPS
+        src=Image.open(sh['img']).convert('RGB'); n=sh.get('sec',SEC)*FPS
         # manga tone: a bit more contrast
         for i in range(n):
             t=i/FPS
@@ -83,10 +120,12 @@ def render(shots,out,title_band=None,SEC=6):
             if sh.get('lines_fx') and t>=sh['lines_fx']: speedlines(fr,sh['fx_center'])
             if title_band: fr.alpha_composite(title_band)
             for ev in sh['events']:
-                if t>=ev['t']:
+                if t>=ev['t'] and t<ev.get('until',99):
                     if ev['type']=='bubble':
                         k=min(1,(t-ev['t'])*6)  # pop-in
                         bubble(fr,ev['lines'],ev['xy'],ev['tail'],ev.get('kind','round'),int(ev.get('size',60)*(0.7+0.3*k)))
+                    elif ev['type']=='cap':
+                        caption(fr,ev['lines'],ev['xy'],ev.get('size',50))
                     elif ev['type']=='sfx':
                         k=min(1,(t-ev['t'])*8)
                         sfx(fr,ev['text'],ev['xy'],int(ev.get('size',170)*(1.4-0.4*k)),ev.get('angle',-12))
