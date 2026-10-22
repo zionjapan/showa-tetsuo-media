@@ -22,13 +22,13 @@ band_cache={}
 def band(n):
     if n in band_cache: return band_cache[n]
     b=Image.new('RGBA',(W,H),(0,0,0,0)); d=ImageDraw.Draw(b)
-    d.rectangle((0,190,W,345),fill=(0,0,0,140))
-    t1=f'昭和から来た男 #{n}'; d.text(((W-d.textlength(t1,font=f_small))/2,200),t1,font=f_small,fill=(255,200,60))
+    d.rectangle((0,955,W,1105),fill=(0,0,0,150))
+    t1=f'昭和から来た男 #{n}'; d.text(((W-d.textlength(t1,font=f_small))/2,965),t1,font=f_small,fill=(255,200,60))
     t2=TITLES[n]; ft=fit(d,t2,58)
-    d.text(((W-d.textlength(t2,font=ft))/2,256),t2,font=ft,fill='white')
+    d.text(((W-d.textlength(t2,font=ft))/2,1021),t2,font=ft,fill='white')
     band_cache[n]=b; return b
 def subs(d,lines,shown,size=74,lh=106):
-    y=BOTTOM-lh*len(lines)
+    y=1120
     for k,L in enumerate(shown):
         f=fit(d,L,size); tw=d.textlength(L,font=f)
         last=(k==len(lines)-1 and len(shown)==len(lines) and len(lines)>1)
@@ -79,10 +79,10 @@ def fight():
             if kind=='ko' and i<5: fr=Image.blend(fr,Image.new('RGB',(W,H),'white'),1-i/5)
             fr=fr.convert('RGBA'); fr.alpha_composite(band(7)); fr=fr.convert('RGB')
             d=ImageDraw.Draw(fr)
-            d.rectangle((40,370,300,430),fill=(170,20,20)); d.text((60,376),'鉄檻 TEKKAN',font=sm,fill='white')
-            d.rectangle((300,370,420,430),fill=(0,0,0)); d.text((318,376),'LIVE',font=sm,fill=(255,60,60))
-            top=BOTTOM-106*len(lines)-100
-            if kind!='win':
+            d.rectangle((40,215,300,275),fill=(170,20,20)); d.text((60,221),'鉄檻 TEKKAN',font=sm,fill='white')
+            d.rectangle((300,215,420,275),fill=(0,0,0)); d.text((318,221),'LIVE',font=sm,fill=(255,60,60))
+            top=-999
+            if False:
                 d.rectangle((0,top,W,top+70),fill=(0,0,0))
                 d.text((60,top+10),'権藤鉄男',font=mid,fill='white'); d.text((440,top+10),'VS',font=mid,fill=(222,184,92)); d.text((580,top+10),'ZERO',font=mid,fill='white')
             else:
