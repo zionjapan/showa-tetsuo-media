@@ -13,7 +13,9 @@ OLD={3:'格闘技オーディションに乱入',4:'金髪ファイターと因�
  11:'47年前の約束、相手はハルさん',12:'47年、雨の中で待っていた人',13:'昭和の男、令和のジムで吹っ飛ぶ',
  14:'昭和の男、ネカフェで力尽きる',15:'ハルさんの指に、あの日の指輪'}
 TITLES={2:'令和のコンビニで大事件',3:'チンピラ瞬殺、まさかのスカウト'}
-TITLES.update({k+1:v for k,v in OLD.items()})
+TITLES.update({k+1:v for k,v in OLD.items() if k<7})
+TITLES.update({k+3:v for k,v in OLD.items() if k>=8})
+TITLES.update({8:'ZERO戦 前半、まさかのダウン',9:'ZERO戦 中盤、昼寝からの逆襲',10:'ZERO戦 決着、58秒の昭和ゲンコツ'})
 import datetime
 def fname(n,suffix=''):
     d=datetime.date(2026,10,20)+datetime.timedelta(days=n)
@@ -113,7 +115,7 @@ def fight():
 if __name__=='__main__':
     for a in sys.argv[1:]:
         n=int(a)
-        if n==8: fight()
-        elif n==3: reel(3,'reel_scout.py')
+        if n==3: reel(3,'reel_scout.py')
         elif n==2: reel(2,'reel2.py')
-        else: reel(n,f'reel{n-1}.py')
+        elif n<=7: reel(n,f'reel{n-1}.py')
+        elif n>=11: reel(n,f'reel{n-3}.py')
