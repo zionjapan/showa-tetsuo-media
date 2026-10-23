@@ -29,9 +29,12 @@ def ep_img(n):
     script='reel%d.py'%(n-1 if n<=7 else n-3)
     s=open(tt2.S+script).read(); P=re.search(r"P='([^']+)'",s).group(1)
     return eval(re.search(r'shots=(\[.*?\])\n',s,re.S).group(1),{'P':P})[0][0]
-for n in range(4,19):
+import sys as _s
+TAG=_s.argv[1] if len(_s.argv)>1 else ''
+for n in range(3 if TAG else 4,19):
     d=datetime.date(2026,10,20)+datetime.timedelta(days=n); key=d.day
-    img,a,b=AM[key]
-    make(ST+img,OUT+f'{d.isoformat()}_story_am.jpg',[(a,200,92,'white'),(b,320,100,Y)],band=(170,450))
-    make(ep_img(n),OUT+f'{d.isoformat()}_story_pm.jpg',[('今夜19時',1200,110,Y),(tt2.TITLES[n],1350,76,'white'),(f'昭和から来た男 #{n}',1480,64,Y)],band=(1170,1580))
+    if key in AM:
+        img,a,b=AM[key]
+        make(ST+img,OUT+f'{d.isoformat()}_story_am{TAG}.jpg',[(a,200,92,'white'),(b,320,100,Y)],band=(170,450))
+    make(ep_img(n) if n!=3 else R+'posts/2026-10-23/scout2.png',OUT+f'{d.isoformat()}_story_pm{TAG}.jpg',[(('今夜TikTokで' if TAG else '今夜19時'),1200,(96 if TAG else 110),Y),(tt2.TITLES[n],1350,76,'white'),(f'昭和から来た男 #{n}'+('  @showa_tetsuo' if TAG else ''),1480,58 if TAG else 64,Y)],band=(1170,1580))
     print(d, n)
