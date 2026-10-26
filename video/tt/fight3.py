@@ -1,6 +1,7 @@
 # ZERO戦 3話（TikTok字幕版 / YouTube漫画版）
 import sys; sys.path.insert(0,'/tmp/claude-0/-home-claude/9d5ec005-9cc8-52f5-9eca-474a40bf5cb4/scratchpad')
 import tt2, manga, bd_fx
+SHADE=Image.open('/tmp/claude-0/-home-claude/9d5ec005-9cc8-52f5-9eca-474a40bf5cb4/scratchpad/shade.png') if False else None
 from manga import bubble, caption, sfx, speedlines, frame_of
 from PIL import Image, ImageDraw, ImageFont, ImageEnhance
 W,H,FPS=1080,1920,30
@@ -47,6 +48,10 @@ def frame_tt(src,ax,z):
     cx=int((im.width-W)*ax); cy=int((im.height-H)*0.03)
     return im.crop((cx,cy,cx+W,cy+H)).convert('RGBA')
 SAFE=True
+_SH=[]
+def _shade():
+    if not _SH: _SH.append(Image.open('/tmp/claude-0/-home-claude/9d5ec005-9cc8-52f5-9eca-474a40bf5cb4/scratchpad/shade.png'))
+    return _SH[0]
 def render(n,mode):
     out=(tt2.OUT+tt2.fname(n,'_safe' if SAFE else '')) if mode=='tt' else ('/home/claude/showa-tetsuo-media/video/yt/'+tt2.fname(n).replace('tiktok','yt'))
     p=tt2.pipe(out); last=None
@@ -73,6 +78,7 @@ def render(n,mode):
             if fx:
                 if mode=='yt' or t<1.2: speedlines(fr,fx)
             if mode=='tt':
+                if SAFE: fr.alpha_composite(_shade())
                 fr.alpha_composite(tt2.band(n))
             else:
                 fr=ImageEnhance.Contrast(fr.convert('RGB')).enhance(1.12).convert('RGBA')
