@@ -41,22 +41,35 @@ def draw_manga(fr,evs,t):
         if e[0]=='b': bubble(fr,e[3],e[4],e[5],e[7],int(e[6]*(0.7+0.3*k)))
         elif e[0]=='c': caption(fr,e[3],e[4],e[5])
         elif e[0]=='s': sfx(fr,e[3],e[4],int(e[5]*(1.4-0.4*min(1,(t-e[1])*8))),e[6])
+def frame_tt(src,ax,z):
+    cs=max(W/src.width,H/src.height)*z
+    im=src.resize((int(src.width*cs),int(src.height*cs)),Image.BILINEAR)
+    cx=int((im.width-W)*ax); cy=int((im.height-H)*0.03)
+    return im.crop((cx,cy,cx+W,cy+H)).convert('RGBA')
+SAFE=True
 def render(n,mode):
-    out=(tt2.OUT+tt2.fname(n)) if mode=='tt' else ('/home/claude/showa-tetsuo-media/video/yt/'+tt2.fname(n).replace('tiktok','yt'))
+    out=(tt2.OUT+tt2.fname(n,'_safe' if SAFE else '')) if mode=='tt' else ('/home/claude/showa-tetsuo-media/video/yt/'+tt2.fname(n).replace('tiktok','yt'))
     p=tt2.pipe(out); last=None
     if n==8:
         src0=Image.open(P+'f_faceoff.png').convert('RGB')
+        if mode=='tt' and SAFE: src0=src0.crop((0,0,src0.width,int(src0.height*0.42)))
         for fr in bd_fx.aori_frames(src0,[('昭和 VS 令和','ガリガリが金髪を喰う'),('素人のジジイ顔が','鉄檻の狂犬に挑む')]):
             p.stdin.write(fr.tobytes())
         post=Image.open(P+'vs_zero.png').convert('RGB')
         for i in range(int(2.5*FPS)):
             z=1.0+0.04*i/(2.5*FPS); im=post.resize((int(W*z),int(H*z))); x=(im.width-W)//2; y=(im.height-H)//2
             p.stdin.write(im.crop((x,y,x+W,y+H)).tobytes())
+    if n==10 and mode=='tt' and SAFE:
+        g=Image.open(P+'f_faceoff.png').convert('RGB'); g=g.crop((0,0,int(g.width*0.55),int(g.height*0.4)))
+        base=bd_fx.cover(g,W,H,0.5,0.3); d=ImageDraw.Draw(base)
+        bd_fx.ctext(d,'残り10秒',760,bd_fx.F(bd_fx.SB,150),'white',8)
+        bd_fx.ctext(d,'決着の時',960,bd_fx.F(bd_fx.SB,130),bd_fx.RED,8,'white')
+        for _ in range(int(1.5*FPS)): p.stdin.write(base.tobytes())
     for img,ax,sec,subl,evs,clock,fx in EP[n]:
         src=Image.open(img).convert('RGB'); nf=sec*FPS
         for i in range(nf):
             t=i/FPS
-            fr=frame_of(src,ax,1.0+(0.08 if mode=='tt' else 0.05)*i/nf)
+            fr=frame_tt(src,ax,2.2+0.08*i/nf) if (mode=='tt' and SAFE) else frame_of(src,ax,1.0+(0.08 if mode=='tt' else 0.05)*i/nf)
             if fx:
                 if mode=='yt' or t<1.2: speedlines(fr,fx)
             if mode=='tt':
