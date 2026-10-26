@@ -47,7 +47,7 @@ def frame_tt(src,ax,z):
     im=src.resize((int(src.width*cs),int(src.height*cs)),Image.BILINEAR)
     cx=int((im.width-W)*ax); cy=int((im.height-H)*0.03)
     return im.crop((cx,cy,cx+W,cy+H)).convert('RGBA')
-SAFE=True
+SAFE=False
 _SH=[]
 def _shade():
     if not _SH: _SH.append(Image.open('/tmp/claude-0/-home-claude/9d5ec005-9cc8-52f5-9eca-474a40bf5cb4/scratchpad/shade.png'))
@@ -64,7 +64,7 @@ def render(n,mode):
         for i in range(int(2.5*FPS)):
             z=1.0+0.04*i/(2.5*FPS); im=post.resize((int(W*z),int(H*z))); x=(im.width-W)//2; y=(im.height-H)//2
             p.stdin.write(im.crop((x,y,x+W,y+H)).tobytes())
-    if n==10 and mode=='tt' and SAFE:
+    if n==10 and mode=='tt':
         g=Image.open(P+'f_faceoff.png').convert('RGB'); g=g.crop((0,0,int(g.width*0.55),int(g.height*0.4)))
         base=bd_fx.cover(g,W,H,0.5,0.3); d=ImageDraw.Draw(base)
         bd_fx.ctext(d,'残り10秒',760,bd_fx.F(bd_fx.SB,150),'white',8)
@@ -91,6 +91,8 @@ def render(n,mode):
                     if e[0]=='s' and e[1]<=t: sfx(fr,e[3],(e[4][0],e[4][1] if e[4][1]<900 else 640),int(e[5]*0.8),e[6])
             else:
                 draw_manga(fr,evs,t)
+            if n==8 and img.endswith('entrance.png') and t>=0.6:
+                bd_fx.stat_card(fr, 640 if mode=='tt' else 1250)
             if n==10 and img.endswith('ko.png') and t>=1.0:
                 bd_fx.ko_telop(fr,'権藤鉄男','（鉄檻1）',y=(700 if mode=='tt' else 1480))
             last=fr.convert('RGB'); p.stdin.write(last.tobytes())

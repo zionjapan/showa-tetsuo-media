@@ -67,3 +67,17 @@ if __name__=='__main__':
     Z=Image.open(R+'posts/2026-10-27/f_faceoff.png').convert('RGB').crop((500,120,1024,900))
     p=poster(T,Z,'昭和から来た男','権藤鉄男','金髪の狂犬','ZERO'); p.save(R+'posts/2026-10-27/vs_zero.png')
     print('ok')
+
+def stat_card(fr,y=1150):
+    lay=Image.new('RGBA',(W,330),(0,0,0,0)); d=ImageDraw.Draw(lay)
+    d.rectangle((40,0,W-40,110),fill=(10,10,10,235)); d.rectangle((40,0,250,110),fill=RED+(255,))
+    d.text((62,22),'鉄檻',font=F(GB,58),fill='white')
+    d.text((275,8),'権藤鉄男',font=F(GB,62),fill='white'); d.text((275,74),'THE SHOWA',font=F(GB,26),fill=(255,206,60))
+    d.rectangle((40,110,W-40,250),fill=(25,25,25,235))
+    cols=[('戦績','0-0'),('身長','182cm'),('体重','52kg'),('出身','1979年 東京')]
+    cw=(W-80)//4
+    for i,(k,v) in enumerate(cols):
+        x=40+i*cw; d.text((x+(cw-d.textlength(k,font=F(GB,28)))/2,125),k,font=F(GB,28),fill=(200,200,200))
+        f=F(GB,44 if len(v)<6 else 34); d.text((x+(cw-d.textlength(v,font=f))/2,175),v,font=f,fill='white')
+    fr.alpha_composite(lay,(0,y)) if fr.mode=='RGBA' else fr.paste(lay,(0,y),lay)
+    return fr
