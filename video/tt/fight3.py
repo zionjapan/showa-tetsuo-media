@@ -77,6 +77,8 @@ def render(n,mode):
             fr=frame_tt(src,ax,2.2+0.08*i/nf) if (mode=='tt' and SAFE) else frame_of(src,ax,1.0+(0.08 if mode=='tt' else 0.05)*i/nf)
             if fx:
                 if mode=='yt' or t<1.2: speedlines(fr,fx)
+            if mode=='tt' and n==9 and img.endswith('f_yuto.png') and t<1.5:
+                tt2.big_title(fr,n); hud(fr,clock,t,sec); last=fr.convert('RGB'); p.stdin.write(last.tobytes()); continue
             if mode=='tt':
                 if SAFE: fr.alpha_composite(_shade())
                 fr.alpha_composite(tt2.band(n))
