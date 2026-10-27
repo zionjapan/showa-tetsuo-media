@@ -23,10 +23,18 @@ def topbar(fr):
     d.text((x, 150), t, font=f, fill=YEL, stroke_width=8, stroke_fill='black')
     e = emoji('😂', 80); fr.paste(e, (int(x + w + 10), 155), e)
 
-def word(fr, t, col, y=1180):
-    d = ImageDraw.Draw(fr); f = F(GB, 150)
-    while d.textlength(t, font=f) > W - 80: f = F(GB, f.size - 10)
-    ctext(d, t, y, f, col, 14)
+def word(fr, ws, k, col, y=1120):
+    # それまでの単語を残して行を作る。今の単語だけ色つき、前の単語は白
+    d = ImageDraw.Draw(fr); f = F(GB, 120); lines = [[]]; 
+    for i, t in enumerate(ws[:k + 1]):
+        cur = ''.join(x for x, _ in lines[-1]) + t
+        if lines[-1] and d.textlength(cur, font=f) > W - 80: lines.append([])
+        lines[-1].append((t, i))
+    for li, ln in enumerate(lines):
+        tw = sum(d.textlength(t, font=f) for t, _ in ln); x = (W - tw) / 2
+        for t, i in ln:
+            d.text((x, y + li * 150), t, font=f, fill=col if i == k else 'white', stroke_width=12, stroke_fill='black')
+            x += d.textlength(t, font=f)
 
 def zoom(src, t, z0, z1, cx, cy):
     z = z0 + (z1 - z0) * t
@@ -46,12 +54,12 @@ lines = [
     (['47年', '早ぇんだよ'], YEL, 0.0, 0.2),
 ]
 for li, (ws, col, cx, cy) in enumerate(lines):
-    per = 14 if li != 3 else 20  # 1単語の長さ（フレーム）
-    n = per * len(ws) + 8
+    per = 24  # 1単語の長さ（フレーム）
+    n = per * len(ws) + 30
     for i in range(n):
         z0,z1=(1.0,1.12) if cx>0.5 else (1.25,1.45)
         fr = zoom(kai, i / n, z0, z1, cx, cy); topbar(fr)
-        k = min(i // per, len(ws) - 1); word(fr, ws[k], col)
+        k = min(i // per, len(ws) - 1); word(fr, ws, k, col)
         add(fr)
 # 締め：対戦ポスター＋煽り
 pos = Image.open(P + 'ep28/vs_buzuto.png').convert('RGB')
