@@ -54,5 +54,4 @@ TikTokルール：各話の最初の画面は殴る絵にしない（にらみ�
 - プロンプト：全25本ぶん完成（このファイル）
 - 開始画像：元の2:3の絵をそのまま使う（aspectRatio=adaptive）。9:16に切った版は video/seedance_in/ にある（予備）
 - 設定確認済み：Seedance 2.0 image2video は startFrame/endFrame 対応、4〜15秒、9:16可、5秒=400・10秒=800
-- 障害：この作業環境から storage.googleapis.com（画像アップロード）と cdn.openart.ai（動画ダウンロード）がブロックされている
-  → ボスが claude.ai の 設定 > Capabilities で2つのドメインを許可すれば、課金後すぐClaudeが全部できる
+- 通信：ボスが許可済み（2026-10-27）。開始画像14枚はOpenArtにアップロード済み → prompts/openart_refs.json
