@@ -1,16 +1,62 @@
 {
- "29-1": {"id":"2Say8YL9GEdx6MuJAfA0","url":"https://cdn.openart.ai/openart-uploads/production/2026-10/create-video/v1egamvgduyNex2P7eg3/29-1_faceoff_1793076447834_bca5dd18.png"},
- "29-2": {"id":"yZTQQ93MwRtlXc61A6hi","url":"https://cdn.openart.ai/openart-uploads/production/2026-10/create-video/v1egamvgduyNex2P7eg3/29-2_ko_1793076875175_90a2c968.png"},
- "22-1": {"id":"7AZGIIRaWwXC2KdhzHo8","url":"https://cdn.openart.ai/openart-uploads/production/2026-10/create-video/v1egamvgduyNex2P7eg3/22-1_nyujo_a_1793076876382_38124f0b.png"},
- "22-2": {"id":"bd4XbalCw8I40luLaIZC","url":"https://cdn.openart.ai/openart-uploads/production/2026-10/create-video/v1egamvgduyNex2P7eg3/22-2_faceoff_1793076877350_a3b7f20b.png"},
- "22-3": {"id":"R4PPm8Q08jWOP4j9EcZm","url":"https://cdn.openart.ai/openart-uploads/production/2026-10/create-video/v1egamvgduyNex2P7eg3/22-3_r1_miss_1793076878560_bd68932a.png"},
- "23-1": {"id":"2b5sjC31ItzcDvvjSeTz","url":"https://cdn.openart.ai/openart-uploads/production/2026-10/create-video/v1egamvgduyNex2P7eg3/23-1_r2_down_1793076880536_7217fb94.png"},
- "23-2": {"id":"uZn31YTYuVfG9krH28YJ","url":"https://cdn.openart.ai/openart-uploads/production/2026-10/create-video/v1egamvgduyNex2P7eg3/23-2_r3_boroboro_1793076881297_62d70314.png"},
- "23-3": {"id":"d7LWeayFzf6IRJxmgHMd","url":"https://cdn.openart.ai/openart-uploads/production/2026-10/create-video/v1egamvgduyNex2P7eg3/23-3_hantei_1793076882459_944c996a.png"},
- "32-1": {"id":"WpJsdeNfjdK7Ozl8plpq","url":"https://cdn.openart.ai/openart-uploads/production/2026-10/create-video/v1egamvgduyNex2P7eg3/32-1_kawasu_1793076883630_47e2628a.png"},
- "32-2": {"id":"nlqIi0EAbpx8niHDO2D2","url":"https://cdn.openart.ai/openart-uploads/production/2026-10/create-video/v1egamvgduyNex2P7eg3/32-2_ketchaku_1793076884816_7a8fab87.png"},
- "32-3": {"id":"DvUWDlpIGdVy1XgYhKjO","url":"https://cdn.openart.ai/openart-uploads/production/2026-10/create-video/v1egamvgduyNex2P7eg3/32-3_te_1793076885930_7e4533b8.png"},
- "35-1": {"id":"WM3VRYkKeBUQqi9Gz5hI","url":"https://cdn.openart.ai/openart-uploads/production/2026-10/create-video/v1egamvgduyNex2P7eg3/35-1_hiza_1793076887317_f5d71bae.png"},
- "35-2": {"id":"lpwBLg1QjNK7DT5dubgd","url":"https://cdn.openart.ai/openart-uploads/production/2026-10/create-video/v1egamvgduyNex2P7eg3/35-2_gyakuten_ko_1793076888541_28033822.png"},
- "35-3": {"id":"fTKYk7UjlyaACDgf2eXB","url":"https://cdn.openart.ai/openart-uploads/production/2026-10/create-video/v1egamvgduyNex2P7eg3/35-3_kanaami_onizuka_1793076889671_5ec3ccab.png"}
+ "29-1": {
+  "id": "2Say8YL9GEdx6MuJAfA0",
+  "url": "https://cdn.openart.ai/openart-uploads/production/2026-10/create-video/v1egamvgduyNex2P7eg3/29-1_faceoff_1793076447834_bca5dd18.png"
+ },
+ "29-2": {
+  "id": "yZTQQ93MwRtlXc61A6hi",
+  "url": "https://cdn.openart.ai/openart-uploads/production/2026-10/create-video/v1egamvgduyNex2P7eg3/29-2_ko_1793076875175_90a2c968.png"
+ },
+ "22-1": {
+  "id": "7AZGIIRaWwXC2KdhzHo8",
+  "url": "https://cdn.openart.ai/openart-uploads/production/2026-10/create-video/v1egamvgduyNex2P7eg3/22-1_nyujo_a_1793076876382_38124f0b.png"
+ },
+ "22-2": {
+  "id": "bd4XbalCw8I40luLaIZC",
+  "url": "https://cdn.openart.ai/openart-uploads/production/2026-10/create-video/v1egamvgduyNex2P7eg3/22-2_faceoff_1793076877350_a3b7f20b.png"
+ },
+ "22-3": {
+  "id": "R4PPm8Q08jWOP4j9EcZm",
+  "url": "https://cdn.openart.ai/openart-uploads/production/2026-10/create-video/v1egamvgduyNex2P7eg3/22-3_r1_miss_1793076878560_bd68932a.png"
+ },
+ "23-1": {
+  "id": "2b5sjC31ItzcDvvjSeTz",
+  "url": "https://cdn.openart.ai/openart-uploads/production/2026-10/create-video/v1egamvgduyNex2P7eg3/23-1_r2_down_1793076880536_7217fb94.png"
+ },
+ "23-2": {
+  "id": "uZn31YTYuVfG9krH28YJ",
+  "url": "https://cdn.openart.ai/openart-uploads/production/2026-10/create-video/v1egamvgduyNex2P7eg3/23-2_r3_boroboro_1793076881297_62d70314.png"
+ },
+ "23-3": {
+  "id": "d7LWeayFzf6IRJxmgHMd",
+  "url": "https://cdn.openart.ai/openart-uploads/production/2026-10/create-video/v1egamvgduyNex2P7eg3/23-3_hantei_1793076882459_944c996a.png"
+ },
+ "32-1": {
+  "id": "WpJsdeNfjdK7Ozl8plpq",
+  "url": "https://cdn.openart.ai/openart-uploads/production/2026-10/create-video/v1egamvgduyNex2P7eg3/32-1_kawasu_1793076883630_47e2628a.png"
+ },
+ "32-2": {
+  "id": "nlqIi0EAbpx8niHDO2D2",
+  "url": "https://cdn.openart.ai/openart-uploads/production/2026-10/create-video/v1egamvgduyNex2P7eg3/32-2_ketchaku_1793076884816_7a8fab87.png"
+ },
+ "32-3": {
+  "id": "DvUWDlpIGdVy1XgYhKjO",
+  "url": "https://cdn.openart.ai/openart-uploads/production/2026-10/create-video/v1egamvgduyNex2P7eg3/32-3_te_1793076885930_7e4533b8.png"
+ },
+ "35-1": {
+  "id": "WM3VRYkKeBUQqi9Gz5hI",
+  "url": "https://cdn.openart.ai/openart-uploads/production/2026-10/create-video/v1egamvgduyNex2P7eg3/35-1_hiza_1793076887317_f5d71bae.png"
+ },
+ "35-2": {
+  "id": "lpwBLg1QjNK7DT5dubgd",
+  "url": "https://cdn.openart.ai/openart-uploads/production/2026-10/create-video/v1egamvgduyNex2P7eg3/35-2_gyakuten_ko_1793076888541_28033822.png"
+ },
+ "35-3": {
+  "id": "fTKYk7UjlyaACDgf2eXB",
+  "url": "https://cdn.openart.ai/openart-uploads/production/2026-10/create-video/v1egamvgduyNex2P7eg3/35-3_kanaami_onizuka_1793076889671_5ec3ccab.png"
+ },
+ "dance": {
+  "id": "ONYXNPnfibcnhaS4j39j",
+  "url": "https://cdn.openart.ai/openart-uploads/production/2026-10/create-video/v1egamvgduyNex2P7eg3/dance_start_barefoot_1793108619532_d8de1546.png"
+ }
 }
