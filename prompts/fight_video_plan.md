@@ -72,3 +72,9 @@ TikTokルール：各話の最初の画面は殴る絵にしない（にらみ�
 - 冒頭は「HOW IT STARTED👇」で試合へつなぐ
 - 注意：実在の選手・社長（Strickland、Dana White）が出てくるが、鉄男では実在の人は使わない
 - 鉄男版：会見で鉄男が鬼塚・バズ斗を煽る（「ヒヨッコが」「ナウくねぇな」）を1単語ずつ字幕、上に「会見が荒れた😂」
+
+## ダンス動画（ボス共有 2026-10-27：Phil Jean「トクトクソング＆ダンス」16秒、AI表示つき）
+- 型：キャラが部屋で全身を映して流行りのダンスを踊るだけ。1カット、カメラ固定、最後に顔のアップ
+- 鉄男版：昭和の部屋（ちゃぶ台・黒電話・ブラウン管）で花柄シャツ＋フレアパンツの鉄男が真顔で踊る
+- 作り方：ChatGPTで全身の開始画像（無料）→ Seedance 2.0 image2video 9:16 720p 15秒＝1,200クレジット。曲はボスがTikTokで流行りの音源を付ける
+- 動きの指示：energetic modern TikTok dance, footwork shuffle, body rolls, arm waves, deadpan serious face the whole time, ends by walking up to the camera and staring into it
