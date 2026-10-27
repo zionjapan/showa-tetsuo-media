@@ -15,7 +15,7 @@ def grade(im):
     return Image.blend(g,im,0.45)
 def ctext(d,t,y,font,fill,stroke=8,sf='black',x=None):
     w=d.textlength(t,font=font); d.text(((W-w)/2 if x is None else x,y),t,font=font,fill=fill,stroke_width=stroke,stroke_fill=sf)
-def poster(left_img,right_img,l_nick,l_name,r_nick,r_name,match='第1試合　1分1ラウンド'):
+def poster(left_img,right_img,l_nick,l_name,r_nick,r_name,match='第1試合　1分1ラウンド',tagline='昭和の根性か、令和の筋肉か'):
     bg=Image.new('RGB',(W,H),(10,8,8)); d=ImageDraw.Draw(bg)
     rnd=random.Random(3)
     for _ in range(26):
@@ -34,7 +34,7 @@ def poster(left_img,right_img,l_nick,l_name,r_nick,r_name,match='第1試合　1�
     rw=d.textlength(r_nick,font=F(GB,56)); d.text((W-60-rw,1420),r_nick,font=F(GB,56),fill=(255,206,60),stroke_width=6,stroke_fill='black')
     rw=d.textlength(r_name,font=F(SB,150)); d.text((W-60-rw,1490),r_name,font=F(SB,150),fill='white',stroke_width=10,stroke_fill='black')
     vs=F(SB,260); ctext(d,'VS',830,vs,RED,14,'white')
-    d.rectangle((0,1740,W,H),fill=(0,0,0)); ctext(d,'昭和の根性か、令和の筋肉か',1780,F(GB,58),'white',4)
+    d.rectangle((0,1740,W,H),fill=(0,0,0)); ctext(d,tagline,1780,F(GB,58),'white',4)
     return bg
 def glitch(im,amt,rnd):
     r,g,b=im.split(); r=ImageChops.offset(r,amt,0); b=ImageChops.offset(b,-amt,0); out=Image.merge('RGB',(r,g,b))
