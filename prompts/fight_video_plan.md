@@ -55,3 +55,11 @@ TikTokルール：各話の最初の画面は殴る絵にしない（にらみ�
 - 開始画像：元の2:3の絵をそのまま使う（aspectRatio=adaptive）。9:16に切った版は video/seedance_in/ にある（予備）
 - 設定確認済み：Seedance 2.0 image2video は startFrame/endFrame 対応、4〜15秒、9:16可、5秒=400・10秒=800
 - 通信：ボスが許可済み（2026-10-27）。開始画像14枚はOpenArtにアップロード済み → prompts/openart_refs.json
+
+## 目標の形（ボス共有 2026-10-27：UFC Reimagined「Seamus O'Grady vs King Charles II」2分40秒）
+- 入場：国旗ガウン＋大きな異名テロップ（THE GLORIOUS）→ 名前テロップ
+- 試合：中継の引きアングル中心、画面下に中継風スコアバー（名前・R1・タイマー）
+- 実況の一言テロップ（白・黄色）：the stare. / IT'S TIME. / wait for it... / BOOM / UH OH. / SEAMUS IS HURT / TAKEDOWN / LONG LIVE THE KING
+- 最後：勝者テロップ「WINS BY SUBMISSION」＋「REMATCH? COMMENT BELOW」でコメントを集める
+- 鉄男版：日本語の一言（にらみ合い。／ゴング。／効いてない。／昭和ゲンコツ!!／ジジイ、立つ。など）、スコアバー「権藤 R1 鬼塚」、最後「再戦見たい？コメントで」
+- 2分40秒＝5秒×約30本＝約12,000クレジット/1試合（720p）。まず鬼塚戦1本をこの長さで作り、YouTube横長＋TikTok縦で出す案
