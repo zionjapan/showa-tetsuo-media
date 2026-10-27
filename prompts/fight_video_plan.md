@@ -35,6 +35,24 @@ TikTokルール：各話の最初の画面は殴る絵にしない（にらみ�
 - 35B: start=35-2_gyakuten_ko｜Slow motion: his overhand right lands, the young fighter falls backward stiff, the referee dives in, outside the cage the champion slowly rises from his seat.
 - 35C: start=35-3_kanaami_onizuka｜The champion and the punch-perm fighter stand face to face in silence; the fighter presses his fist against the champion's chest; flashes and roaring crowd, slow orbit around them.
 
+## 追加：ブレイキングダウン風の中継パッケージ（ボス要望 2026-10-27）
+各試合に「入場 → ゴング → ドローン俯瞰」を入れる。入場の名前テロップと「鉄檻」ロゴはClaudeが後で重ねる（AIに文字は書かせない）
+- E（入場）: start=各試合のにらみ合い or 入場の絵｜He walks out of a dark tunnel into a blinding white spotlight, thick smoke, red strobe lights, the camera walking backward in front of him, the crowd screaming, BreakingDown-style entrance.
+- G（ゴング）: start=にらみ合いの絵｜Close-up of a referee's hand chopping down between two fighters, a bell rings, both fighters explode toward each other, quick handheld shot through the cage.
+- D（ドローン）: start=試合中の絵｜Top-down drone shot directly above the octagon cage, slowly descending and rotating, two tiny fighters circling each other on the canvas, packed arena around them, spotlights sweeping.
+- 追加本数：鬼塚戦 G・D（入場は22Aあり）／バズ斗・山嵐・氷室戦 E・G・D ＝ 11本 ＝ 4,400クレジット
+
+## 合計
+- 基本14本＋中継11本＝25本＝10,000クレジット、作り直し込みで約15,000
+- 予算が足りなければ、鬼塚戦（#22・#23）と氷室戦（#35）を優先
+
 ## 使い方
 - 生成した5秒動画は、各話の動画の中に静止画と組み合わせて入れる（Claudeが編集）
 - 課金後：残高を確認 → T1を作る → ボス確認 → 残り13本
+
+## 準備状況（2026-10-27）
+- プロンプト：全25本ぶん完成（このファイル）
+- 開始画像：元の2:3の絵をそのまま使う（aspectRatio=adaptive）。9:16に切った版は video/seedance_in/ にある（予備）
+- 設定確認済み：Seedance 2.0 image2video は startFrame/endFrame 対応、4〜15秒、9:16可、5秒=400・10秒=800
+- 障害：この作業環境から storage.googleapis.com（画像アップロード）と cdn.openart.ai（動画ダウンロード）がブロックされている
+  → ボスが claude.ai の 設定 > Capabilities で2つのドメインを許可すれば、課金後すぐClaudeが全部できる
