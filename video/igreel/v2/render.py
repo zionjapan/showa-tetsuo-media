@@ -36,7 +36,7 @@ def run(c):
         z=1.0+0.10*i/n; cs=max(W/src.width,H/src.height)*z
         im=src.resize((int(src.width*cs),int(src.height*cs)),Image.BILINEAR)
         cx=int((im.width-W)*ax); cy=int((im.height-H)*0.15)
-        fr=im.crop((cx,cy,cx+W,cy+H)).convert('RGBA')
+        fr=im.crop((cx,cy,cx+W,cy+H)).convert('RGBA'); clean=fr
         ov=Image.new('RGBA',(W,H),(0,0,0,0)); d=ImageDraw.Draw(ov)
         d.rectangle((0,1010,W,1200),fill=(0,0,0,150))
         tw=d.textlength(label,font=fl); d.text(((W-tw)/2,1022),label,font=fl,fill=(255,255,255))
@@ -51,12 +51,15 @@ def run(c):
                 y+=120
         d.text((W-330,1840),'@showa_tetsuo',font=fs,fill=(255,255,255,200),stroke_width=2,stroke_fill='black')
         fr=Image.alpha_composite(fr,ov).convert('RGB'); p.stdin.write(fr.tobytes())
-    e=ImageEnhance.Brightness(fr.filter(ImageFilter.GaussianBlur(14))).enhance(0.4); d=ImageDraw.Draw(e)
+    e=clean; band=Image.new('RGBA',(W,H),(0,0,0,0)); ImageDraw.Draw(band).rectangle((0,860,W,1290),fill=(0,0,0,165)); e=Image.alpha_composite(e,band).convert('RGB'); d=ImageDraw.Draw(e)
     for t,y,sz,c in [('フォローしとけ',900,110,(255,200,60)),('明日も令和に',1060,84,'white'),('殴り込むぜ',1170,84,'white')]:
         f=ImageFont.truetype(F,sz); w=d.textlength(t,font=f); d.text(((W-w)/2,y),t,font=f,fill=c,stroke_width=9,stroke_fill='black')
     b=e.tobytes()
     for _ in range(int(1.5*FPS)): p.stdin.write(b)
     p.stdin.close(); p.wait()
 import os; os.makedirs(R+'video/igreel/v2',exist_ok=True)
-for c in C: run(c)
+import sys
+ONLY=[int(a) for a in sys.argv[1:]]
+for c in C:
+    if not ONLY or c[0] in ONLY: run(c)
 print('done')
