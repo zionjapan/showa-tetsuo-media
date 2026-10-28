@@ -78,3 +78,8 @@ TikTokルール：各話の最初の画面は殴る絵にしない（にらみ�
 - 鉄男版：昭和の部屋（ちゃぶ台・黒電話・ブラウン管）で花柄シャツ＋フレアパンツの鉄男が真顔で踊る
 - 作り方：ChatGPTで全身の開始画像（無料）→ Seedance 2.0 image2video 9:16 720p 15秒＝1,200クレジット。曲はボスがTikTokで流行りの音源を付ける
 - 動きの指示：energetic modern TikTok dance, footwork shuffle, body rolls, arm waves, deadpan serious face the whole time, ends by walking up to the camera and staring into it
+
+## 金曜（10/30）課金予定・その日の順番（ボス 2026-10-28）
+1. ダンス3本（Seedance 2.0 Mini 10秒×3 ≒1,200）：昭和の部屋／銭湯の脱衣所／河原
+2. 反応を見て、試合のテスト（バズ斗戦 にらみ合い→KO 5秒 400）
+参考：Peter Griffin（@theycallmepeety）10/15開始で5.7万フォロワー。1人・同じ服・部屋で流行りの曲に合わせて踊るだけ・文字なし・毎日
