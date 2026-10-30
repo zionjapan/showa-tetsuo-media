@@ -3,7 +3,7 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from bd_fx import *
 from PIL import Image, ImageDraw, ImageEnhance, ImageFilter
 V='/home/claude/showa-tetsuo-media/video/future/'; G=V+'gfx/'; T=V+'_t/'; os.makedirs(T,exist_ok=True)
-OUT=V+'future_ufc_full.mp4'
+OUT=V+'future_ufc_full_v2.mp4'
 ENC=['-r','30','-c:v','libx264','-pix_fmt','yuv420p','-crf','18','-c:a','aac','-ar','44100','-ac','2']
 def run(c): subprocess.run(c, check=True)
 segs=[]
@@ -25,7 +25,7 @@ FU=V+'future_ufc_v1.mp4'
 # オープニング
 op=Image.new('RGBA',(W,H),(0,0,0,0)); d=ImageDraw.Draw(op); d.rectangle((0,1440,W,1640),fill=(0,0,0,150))
 ctext(d,'20XX年',1455,F(SB,110),'white',8); ctext(d,'ZION FC 1　世界王座戦',1575,F(GB,46),(255,206,60),5); op.save(T+'op.png')
-seg(FU,0,2.6,[(T+'op.png',0.2,2.6)])
+seg(FU,0,3.15,[(T+'op.png',0.2,3.15)])
 seg(V+'b_walk_champ.mp4',0,6,[(G+'lt_champ.png',1.2,6)])
 seg(V+'a_walk_tetsuo.mp4',0,8,[(G+'lt_tetsuo.png',1.5,8)])
 seg(V+'c_cage.mp4',0,9.5)
@@ -34,14 +34,14 @@ run(['ffmpeg','-v','error','-y','-ss','2.0','-i',FU,'-frames:v','1',T+'bg.png'])
 bg=Image.open(T+'bg.png').convert('RGB').resize((W,H)).filter(ImageFilter.GaussianBlur(14)); bg=ImageEnhance.Brightness(bg).enhance(0.6).convert('RGBA')
 tl=Image.open(G+'tale.png'); bg.alpha_composite(tl); still(bg.convert('RGB'),3.5,FU,0)
 seg(V+'d_announce.mp4',0,5.0)
-seg(FU,2.6,7.4,[(G+'scorebar.png',0,7.4)])
-seg(V+'e_gloves.mp4',0,5.0,[(G+'scorebar.png',0,5.0)])
+seg(V+'f_faceoff_mg.mp4',0,9.0,[(G+'scorebar.png',0,9.0)])
+seg(V+'e_gloves_mg.mp4',0,5.0,[(G+'scorebar.png',0,5.0)])
 # 締め
-run(['ffmpeg','-v','error','-y','-sseof','-0.1','-i',V+'e_gloves.mp4','-frames:v','1',T+'last.png'])
+run(['ffmpeg','-v','error','-y','-sseof','-0.1','-i',V+'e_gloves_mg.mp4','-frames:v','1',T+'last.png'])
 e=ImageEnhance.Brightness(Image.open(T+'last.png').convert('RGB').resize((W,H))).enhance(0.35); d=ImageDraw.Draw(e)
 ctext(d,'これは、',760,F(SB,80),'white',8); ctext(d,'昭和から来た男の',870,F(SB,96),'white',8)
 ctext(d,'未来かもしれない',990,F(SB,96),(255,206,60),8); ctext(d,'権藤鉄男　毎日19時更新',1300,F(GB,50),'white',6)
-still(e,4.0,V+'e_gloves.mp4',1.0)
+still(e,4.0,V+'e_gloves_mg.mp4',1.0)
 open(T+'l.txt','w').write(''.join(f"file '{s}'\n" for s in segs))
 run(['ffmpeg','-v','error','-y','-f','concat','-safe','0','-i',T+'l.txt']+ENC+['-movflags','+faststart',OUT])
 print('done')
