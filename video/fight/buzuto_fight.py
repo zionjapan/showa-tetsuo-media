@@ -30,7 +30,17 @@ run(['ffmpeg', '-v', 'error', '-y', '-i', FACE, '-i', V + '_live.png', '-filter_
 # 3) KO（5.5秒以降にKOテロップ）
 ko = Image.new('RGBA', (W, H), (0, 0, 0, 0)); ko_telop(ko, '権藤鉄男', '（鉄檻2）', y=1380); ko.save(V + '_ko.png')
 run(['ffmpeg', '-v', 'error', '-y', '-i', KO, '-i', V + '_live.png', '-i', V + '_ko.png', '-filter_complex',
-     "[0:v]setsar=1[a];[a][1:v]overlay=0:0[b];[b][2:v]overlay=0:0:enable='gte(t,5.5)'", '-r', '30', '-c:v', 'libx264', '-pix_fmt', 'yuv420p', '-c:a', 'aac', '-ar', '44100', '-ac', '2', V + '_p3.mp4'])
+     "[0:v]setsar=1,crop=iw-80:ih-142:'40+if(between(t,4.82,5.2),34*sin(90*t),0)':'71+if(between(t,4.82,5.2),34*cos(70*t),0)',scale=1080:1920,"
+     "drawbox=0:0:iw:ih:white:t=fill:enable='between(t,4.84,4.92)'[a];[a][1:v]overlay=0:0[b];[b][2:v]overlay=0:0:enable='gte(t,5.5)'",
+     '-af', "volume='if(between(t,4.8,5.3),2.2,1)':eval=frame",
+     '-r', '30', '-c:v', 'libx264', '-pix_fmt', 'yuv420p', '-c:a', 'aac', '-ar', '44100', '-ac', '2', V + '_p3.mp4'])
+# 3b) スローリプレイ（インパクトを0.3倍速でアップ）
+rp = Image.new('RGBA', (W, H), (0, 0, 0, 0)); d = ImageDraw.Draw(rp)
+d.rectangle((40, 215, 330, 285), fill=(214, 28, 28)); d.text((62, 222), 'REPLAY', font=F(GB, 46), fill='white')
+rp.save(V + '_rp.png')
+run(['ffmpeg', '-v', 'error', '-y', '-ss', '4.3', '-t', '1.3', '-i', KO, '-i', V + '_rp.png', '-filter_complex',
+     "[0:v]setpts=3.3*PTS,crop=860:1529:110:60,scale=1080:1920,setsar=1,drawbox=0:0:iw:ih:white:t=fill:enable='between(t,1.75,1.95)'[a];[a][1:v]overlay=0:0",
+     '-af', 'atempo=0.5,atempo=0.606,volume=1.8', '-r', '30', '-c:v', 'libx264', '-pix_fmt', 'yuv420p', '-c:a', 'aac', '-ar', '44100', '-ac', '2', V + '_p3b.mp4'])
 # 4) 勝ち名乗り（最後のコマを止めて結果）
 run(['ffmpeg', '-v', 'error', '-y', '-sseof', '-0.1', '-i', KO, '-frames:v', '1', V + '_last.png'])
 last = Image.open(V + '_last.png').convert('RGB').resize((W, H))
@@ -44,7 +54,7 @@ e.save(V + '_end.png')
 run(['ffmpeg', '-v', 'error', '-y', '-loop', '1', '-t', '3', '-i', V + '_end.png', '-f', 'lavfi', '-t', '3', '-i', 'anullsrc=r=44100:cl=stereo',
      '-r', '30', '-c:v', 'libx264', '-pix_fmt', 'yuv420p', '-c:a', 'aac', '-ar', '44100', V + '_p4.mp4'])
 with open(V + '_list.txt', 'w') as f:
-    for p in ['_p1', '_p2', '_p3', '_p4']: f.write(f"file '{V}{p}.mp4'\n")
+    for p in ['_p1', '_p2', '_p3', '_p3b', '_p4']: f.write(f"file '{V}{p}.mp4'\n")
 run(['ffmpeg', '-v', 'error', '-y', '-f', 'concat', '-safe', '0', '-i', V + '_list.txt', '-c:v', 'libx264', '-pix_fmt', 'yuv420p', '-crf', '18', '-c:a', 'aac', '-movflags', '+faststart', OUT])
-for p in ['_p1.mp4', '_p2.mp4', '_p3.mp4', '_p4.mp4', '_live.png', '_ko.png', '_last.png', '_end.png', '_list.txt']: os.remove(V + p)
+for p in ['_p1.mp4', '_p2.mp4', '_p3.mp4', '_p3b.mp4', '_rp.png', '_p4.mp4', '_live.png', '_ko.png', '_last.png', '_end.png', '_list.txt']: os.remove(V + p)
 print('done', OUT)
