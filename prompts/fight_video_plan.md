@@ -101,3 +101,6 @@ TikTokルール：各話の最初の画面は殴る絵にしない（にらみ�
 ## 音楽の分担（ボス決定 2026-10-31）
 - 大事な動画（本編・試合・未来の鉄男など）：Claudeが動画を送り、ボスがYouTube/TikTokアプリで流行りの曲を付けて手動で上げる
 - 毎日の昭和ネタ（YouTube 18:22）：自作BGM（video/yt_v3/bgm_*.wav：enka/comic/nekketsu）＋効果音を入れて自動投稿
+
+## トクトクダンス スーツ版（2026-10-31）
+- 完成版：video/dance/dance_toctoc_suit_final.mp4（ボスが手直しした版。TikTok以外で使うときはこれを使う）
