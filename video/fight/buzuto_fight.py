@@ -16,8 +16,8 @@ pos = Image.open(R + 'posts/ep28/vs_buzuto.png').convert('RGB').resize((W, H))
 fr += [pos] * int(2.2 * FPS)
 for f in os.listdir(TMP): os.remove(os.path.join(TMP, f))
 for i, f in enumerate(fr): f.save(f'{TMP}/{i:04d}.jpg', quality=92)
-run(['ffmpeg', '-v', 'error', '-y', '-framerate', str(FPS), '-i', f'{TMP}/%04d.jpg', '-f', 'lavfi', '-i', 'anullsrc=r=44100:cl=stereo',
-     '-shortest', '-c:v', 'libx264', '-pix_fmt', 'yuv420p', '-r', '30', '-c:a', 'aac', '-ar', '44100', V + '_p1.mp4'])
+run(['ffmpeg', '-v', 'error', '-y', '-framerate', str(FPS), '-i', f'{TMP}/%04d.jpg', '-ss', '0', '-i', FACE,
+     '-map', '0:v', '-map', '1:a', '-af', 'volume=0.8,afade=t=in:d=0.8', '-shortest', '-c:v', 'libx264', '-pix_fmt', 'yuv420p', '-r', '30', '-c:a', 'aac', '-ar', '44100', '-ac', '2', V + '_p1.mp4'])
 # 2) にらみ合い（ロゴとLIVE表示を重ねる）
 lay = Image.new('RGBA', (W, H), (0, 0, 0, 0)); d = ImageDraw.Draw(lay)
 d.rectangle((40, 215, 300, 275), fill=(170, 20, 20)); d.text((60, 221), '鉄檻 TEKKAN', font=F(GB, 34), fill='white')
@@ -51,8 +51,8 @@ ctext(d, 'KO勝ち', 820, F(SB, 190), RED, 12, 'white')
 ctext(d, '権藤鉄男', 1060, F(SB, 130), 'white', 10)
 ctext(d, '次の相手は、元力士・山嵐', 1300, F(GB, 60), (255, 206, 60), 6)
 e.save(V + '_end.png')
-run(['ffmpeg', '-v', 'error', '-y', '-loop', '1', '-t', '3', '-i', V + '_end.png', '-f', 'lavfi', '-t', '3', '-i', 'anullsrc=r=44100:cl=stereo',
-     '-r', '30', '-c:v', 'libx264', '-pix_fmt', 'yuv420p', '-c:a', 'aac', '-ar', '44100', V + '_p4.mp4'])
+run(['ffmpeg', '-v', 'error', '-y', '-loop', '1', '-t', '3', '-i', V + '_end.png', '-ss', '6.5', '-t', '3', '-i', KO,
+     '-map', '0:v', '-map', '1:a', '-af', 'afade=t=out:st=2.2:d=0.8', '-shortest', '-r', '30', '-c:v', 'libx264', '-pix_fmt', 'yuv420p', '-c:a', 'aac', '-ar', '44100', '-ac', '2', V + '_p4.mp4'])
 with open(V + '_list.txt', 'w') as f:
     for p in ['_p1', '_p2', '_p3', '_p3b', '_p4']: f.write(f"file '{V}{p}.mp4'\n")
 run(['ffmpeg', '-v', 'error', '-y', '-f', 'concat', '-safe', '0', '-i', V + '_list.txt', '-c:v', 'libx264', '-pix_fmt', 'yuv420p', '-crf', '18', '-c:a', 'aac', '-movflags', '+faststart', OUT])
