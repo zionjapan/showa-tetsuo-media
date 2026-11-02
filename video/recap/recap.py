@@ -52,7 +52,7 @@ def overlay(label, lines, t, idx):
     y = 1370
     for k, L in enumerate(lines):
         f = fit(d, L, 96 if k == 1 else 84)
-        if t > 0.12 + 0.15 * k:
+        if idx == 0 or t > 0.12 + 0.15 * k:
             d.text(((W - d.textlength(L, font=f)) / 2, y), L, font=f, fill='white' if k == 0 else (255, 236, 120), stroke_width=9, stroke_fill='black')
         y += 120
     # 進み具合のバー
@@ -73,7 +73,7 @@ def run():
             t = i / FPS
             fr = frame_of(src, ax, t, dur); last = fr
             fr = Image.alpha_composite(fr, overlay(label, lines, t, idx))
-            if t < 0.07: fr = Image.blend(fr, Image.new('RGBA', (W, H), (255, 255, 255, 255)), 0.55)
+            if t < 0.07 and idx > 0: fr = Image.blend(fr, Image.new('RGBA', (W, H), (255, 255, 255, 255)), 0.55)
             p.stdin.write(fr.convert('RGB').tobytes())
         T += dur
     # 締め：暗くして「続きは毎日19時」
