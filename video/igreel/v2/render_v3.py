@@ -61,7 +61,7 @@ def run(c):
             y += 140 if not last else 150
         d.text((W - 330, 1840), '@showa_tetsuo', font=font(40), fill=(255, 255, 255, 200), stroke_width=2, stroke_fill='black')
         fr = Image.alpha_composite(fr, ov)
-        if t < 0.08:  # 一瞬白く光る
+        if 0.10 < t < 0.18:  # 一瞬白く光る（1コマ目は白くしない＝表紙対策）
             fr = Image.blend(fr, Image.new('RGBA', (W, H), (255, 255, 255, 255)), 0.6)
         p.stdin.write(fr.convert('RGB').tobytes())
     e = clean.copy(); band = Image.new('RGBA', (W, H), (0, 0, 0, 0))

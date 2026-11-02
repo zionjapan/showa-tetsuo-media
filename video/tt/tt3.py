@@ -45,7 +45,7 @@ def render(n):
             d.text((CX - d.textlength(L, font=font(sz)) / 2, y), L, font=font(sz), fill=(255, 236, 120) if k == len(hook) - 1 else 'white', stroke_width=10, stroke_fill='black')
             y += sz + 25
         fr.alpha_composite(lay)
-        if tt < 0.08: fr = Image.blend(fr, Image.new('RGBA', (W, H), 'white'), 0.6)
+        if 0.10 < tt < 0.18: fr = Image.blend(fr, Image.new('RGBA', (W, H), 'white'), 0.6)  # 1コマ目は白くしない（表紙が白くなるため）
         p.stdin.write(fr.convert('RGB').tobytes()); nf += 1
     # 本編
     for f, ax, lines in shots:
