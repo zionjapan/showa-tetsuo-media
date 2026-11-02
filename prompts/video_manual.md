@@ -11,6 +11,7 @@
 - 生成後も拡大して確認（眼鏡・靴・体・マウスピース・人数・背景の変化）
 
 ## 使う画像
+- 顔の見本3枚（posts/identity/tetsuo_front.png・tetsuo_34.png・tetsuo_full.png）を、新しい画像・動画を作るときに毎回一緒に入れる（AÏRA METHODのやり方・11/3作成）
 - 学ランは必ず帽子なし（posts/dance/dance_banchou_nohat.png）。ボスがフランキーで選んだ方。帽子ありのdance_banchou.pngは使わない
 - 前に使った服の画像を再利用するときは、ボスが最終的に選んだ版かを確認してから使う
 
