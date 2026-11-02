@@ -19,9 +19,11 @@
 - 中国本土（抖音）向け
 
 ## 作り済み・出す日が決まっているもの
+- 未定：あらすじの動く版（KO場面でPixVerse約50・Seedance約160を比較してから。11/3の反応を見て判断）
 - 未定：MOODダンス ボディガード3人版（ボスが9.8秒に編集した dance/dance_mood_final.mov を使う）
-- 11/3(祝)昼 トクトクダンス スーツ版（dance/dance_toctoc_suit_final.mp4）
-- 11/7(土)昼 入場（training/walkout.mp4）※11/2平日のため移動
+- 11/3(祝)昼 あらすじ「30秒でわかる権藤鉄男」（recap/recap30.mp4）→上げたらすぐ固定
+- 11/7(土)昼 トクトクダンス スーツ版（dance/dance_toctoc_suit_final.mp4）※11/3から移動
+- 未定：入場（training/walkout.mp4）次の空いている週末の昼
 - 11/8(日)昼 サンドバッグ ジャージ版（training/bag_v1.mp4）
 - 11/14(土)昼 サンドバッグ タイソン版（training/bag_tyson.mp4）
 - 未定：バズ斗戦30秒（fight/buzuto_fight_30s.mp4）、バズ斗予告（fight/buzuto_teaser.mp4）、未来の鉄男UFC（future/）
