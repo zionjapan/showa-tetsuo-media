@@ -19,8 +19,8 @@
 - 中国本土（抖音）向け
 
 ## 作り済み・出す日が決まっているもの
-- 11/2(月)昼 入場（training/walkout.mp4）
 - 11/3(祝)昼 トクトクダンス スーツ版（dance/dance_toctoc_suit_final.mp4）
+- 11/7(土)昼 入場（training/walkout.mp4）※11/2平日のため移動
 - 11/8(日)昼 サンドバッグ ジャージ版（training/bag_v1.mp4）
 - 11/14(土)昼 サンドバッグ タイソン版（training/bag_tyson.mp4）
 - 未定：バズ斗戦30秒（fight/buzuto_fight_30s.mp4）、バズ斗予告（fight/buzuto_teaser.mp4）、未来の鉄男UFC（future/）
