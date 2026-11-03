@@ -27,7 +27,7 @@
 - 中国本土（抖音）向け
 
 ## 作り済み・出す日が決まっているもの
-- 未定：MOODダンス ボディガード3人版（ボスが9.8秒に編集した dance/dance_mood_final.mov を使う）
+- 予備：MOODダンス 白スーツ＋ボディガード（dance/dance_mood_final.mov）次の空いている週末か、ダンスが足りないとき用
 - 11/3(祝)朝 体育館ダンス（dance/dance_gym_raw.mp4・表紙dance_gym_cover.jpg）
 - 11/4(火)朝 あらすじ「30秒でわかる権藤鉄男」（recap/recap30.mp4）→上げたらすぐ固定
 - 11/7(土)昼 トクトクダンス スーツ版（dance/dance_toctoc_suit_final.mp4）※11/3から移動
