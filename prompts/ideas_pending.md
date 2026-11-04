@@ -28,10 +28,10 @@
 - 中国本土（抖音）向け
 
 ## 作り済み・出す日が決まっているもの
-- 予備：MOODダンス 白スーツ＋ボディガード（dance/dance_mood_final.mov）次の空いている週末か、ダンスが足りないとき用
 - 11/3(祝)朝 体育館ダンス（dance/dance_gym_raw.mp4・表紙dance_gym_cover.jpg）
 - 11/4(火)朝 あらすじ「30秒でわかる権藤鉄男」（recap/recap30.mp4）→上げたらすぐ固定
-- 11/7(土)昼 入場・白金ガウン（training/walkout.mp4）＋プロモート約1,000円（ボス選択 11/5）
+- 11/7(土)昼 MOODダンス 白スーツ＋ボディガード（dance/dance_mood_final.mov・表紙dance_mood_cover.jpg）＋プロモート約1,000円（ボス選択 11/5）
+- 未定：入場（training/walkout.mp4）次の空いている週末の昼
 - 未定：トクトクダンス スーツ版（dance/dance_toctoc_suit_final.mp4）次の空いている週末の昼
 - 11/8(日)昼 サンドバッグ ジャージ版（training/bag_v1.mp4）
 - 11/14(土)昼 サンドバッグ タイソン版（training/bag_tyson.mp4）
