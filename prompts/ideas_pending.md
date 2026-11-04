@@ -27,15 +27,15 @@
 - OmniRogue（Seedance無制限の怪しいサイト）
 - 中国本土（抖音）向け
 
-## 作り済み・出す日が決まっているもの
-- 11/3(祝)朝 体育館ダンス（dance/dance_gym_raw.mp4・表紙dance_gym_cover.jpg）
-- 11/4(火)朝 あらすじ「30秒でわかる権藤鉄男」（recap/recap30.mp4）→上げたらすぐ固定
-- 11/7(土)昼 MOODダンス 白スーツ＋ボディガード（dance/dance_mood_final.mov・表紙dance_mood_cover.jpg）＋プロモート約1,000円（ボス選択 11/5）
-- 未定：入場（training/walkout.mp4）次の空いている週末の昼
-- 未定：トクトクダンス スーツ版（dance/dance_toctoc_suit_final.mp4）次の空いている週末の昼
-- 11/8(日)昼 サンドバッグ ジャージ版（training/bag_v1.mp4）
-- 11/14(土)昼 サンドバッグ タイソン版（training/bag_tyson.mp4）
-- 未定：バズ斗戦30秒（fight/buzuto_fight_30s.mp4）、バズ斗予告（fight/buzuto_teaser.mp4）、未来の鉄男UFC（future/）
+## 作り済み・出す日が決まっているもの（単発は2日おき・昼12時。ボス決定 11/5）
+- 11/5(木)昼 入場・白金ガウン（training/walkout.mp4）
+- 11/7(土)昼 MOODダンス 白スーツ＋ボディガード（dance/dance_mood_final.mov・表紙dance_mood_cover.jpg）＋プロモート約1,000円
+- 11/9(月)昼 サンドバッグ ジャージ版（training/bag_v1.mp4）
+- 11/11(水)昼 トクトクダンス スーツ版（dance/dance_toctoc_suit_final.mp4）
+- 11/13(金)昼 サンドバッグ タイソン版（training/bag_tyson.mp4）
+- 11/15(日)昼 バズ斗予告（fight/buzuto_teaser.mp4）
+- 11/17(火)昼 バズ斗戦30秒（fight/buzuto_fight_30s.mp4）
+- 11/19以降：新しく作る（クレジット残り約1,580、ダンス1本約1,200）
 
 ## 判断の目安
 - 鉄男1本に集中（11/2ボス決定）。プロモート予算は月2〜3万円が上限
