@@ -16,13 +16,13 @@ def cover(n, src, out):
     tmp = out + '.bg.png'
     subprocess.run(['ffmpeg', '-v', 'error', '-y', '-ss', '2.0', '-i', src, '-frames:v', '1', '-vf', f'scale={W}:{H}', tmp], check=True)
     im = ImageEnhance.Brightness(Image.open(tmp).convert('RGB')).enhance(0.85).convert('RGBA'); os.remove(tmp)
-    ov = Image.new('RGBA', (W, H), (0, 0, 0, 0)); ImageDraw.Draw(ov).rectangle((0, 940, W, 1800), fill=(0, 0, 0, 235))
+    ov = Image.new('RGBA', (W, H), (0, 0, 0, 0)); ImageDraw.Draw(ov).rectangle((0, 840, W, 1700), fill=(0, 0, 0, 255))
     im = Image.alpha_composite(im, ov).convert('RGB'); d = ImageDraw.Draw(im)
     def t(txt, y, sz, col):
         f = ImageFont.truetype(F, sz)
         while d.textlength(txt, font=f) > 1010: sz -= 4; f = ImageFont.truetype(F, sz)
         d.text(((W - d.textlength(txt, font=f)) / 2, y), txt, font=f, fill=col, stroke_width=12, stroke_fill='black')
-    t('昭和から来た男', 1080, 130, 'white'); t(f'#{n}', 1230, 260, Y); t(TITLES.get(n, ''), 1560, 80, 'white')
+    t('昭和から来た男', 900, 130, 'white'); t(f'#{n}', 1050, 260, Y); t(TITLES.get(n, ''), 1380, 80, 'white')  # 一覧の再生数の表示にかぶらないよう上寄せ
     im.save(out, quality=92)
 
 def bake(n):
