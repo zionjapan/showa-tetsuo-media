@@ -17,9 +17,14 @@ def make(n,img,ax,lines):
         f=ImageFont.truetype(F,sz)
         while d.textlength(txt,font=f)>1010: sz-=4; f=ImageFont.truetype(F,sz)
         d.text(((W-d.textlength(txt,font=f))/2,y),txt,font=f,fill=col,stroke_width=12,stroke_fill='black')
-    t(f'昭和から来た男 #{n}',1085,64,Y)
-    y=1180 if len(lines)==3 else 1250
-    for k,L in enumerate(lines):
-        t(L,y,175,Y if k==len(lines)-1 else 'white'); y+=190
-    out=R+f'video/covers/cover_{n}.jpg'; im.save(out,quality=92); print(out)
-for n in ([int(a) for a in sys.argv[1:]] or EP): make(n,*EP[n])
+    if STYLE=='series':  # シリーズ名と番号を主役に、題名は小さく
+        t('昭和から来た男',1090,130,'white'); t(f'#{n}',1240,260,Y); t(''.join(lines),1560,80,'white')
+    else:
+        t(f'昭和から来た男 #{n}',1085,64,Y)
+        y=1180 if len(lines)==3 else 1250
+        for k,L in enumerate(lines):
+            t(L,y,175,Y if k==len(lines)-1 else 'white'); y+=190
+    out=R+f'video/covers/cover_{n}'+('_series' if STYLE=='series' else '')+'.jpg'; im.save(out,quality=92); print(out)
+args=sys.argv[1:]; STYLE='series' if 'series' in args else 'title'
+for n in ([int(a) for a in args if a.isdigit()] or EP):
+    make(n,*EP[n])
