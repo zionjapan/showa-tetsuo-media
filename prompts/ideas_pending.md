@@ -30,12 +30,12 @@
 ## 作り済み・出す日が決まっているもの（単発は2日おき・昼12時。ボス決定 11/5）
 - 11/5(木)昼 入場・白金ガウン（training/walkout.mp4）
 - 11/6(金)20時 MOODダンス 白スーツ＋ボディガード（dance/dance_mood_final.mov・表紙dance_mood_cover_big.jpg）＋プロモート約1,000円（前倒し・ボス決定 11/6）
-- 11/9(月)昼 サンドバッグ ジャージ版（training/bag_v1.mp4）
-- 11/11(水)昼 トクトクダンス スーツ版（dance/dance_toctoc_suit_final.mp4）
-- 11/13(金)昼 サンドバッグ タイソン版（training/bag_tyson.mp4）
-- 11/15(日)昼 バズ斗予告（fight/buzuto_teaser.mp4）
-- 11/17(火)昼 バズ斗戦30秒（fight/buzuto_fight_30s.mp4）
-- 11/19以降：新しく作る（クレジット残り約1,580、ダンス1本約1,200）
+- 11/8(日)昼 サンドバッグ ジャージ版（training/bag_v1.mp4）
+- 11/10(火)昼 トクトクダンス スーツ版（dance/dance_toctoc_suit_final.mp4）
+- 11/12(木)昼 サンドバッグ タイソン版（training/bag_tyson.mp4）
+- 11/14(土)昼 バズ斗予告（fight/buzuto_teaser.mp4）
+- 11/16(日)昼 バズ斗戦30秒（fight/buzuto_fight_30s.mp4）
+- 11/18以降：新しく作る（クレジット残り約1,580、ダンス1本約1,200）
 
 ## 判断の目安
 - 鉄男1本に集中（11/2ボス決定）。プロモート予算は月2〜3万円が上限
