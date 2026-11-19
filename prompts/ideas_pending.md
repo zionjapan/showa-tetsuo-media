@@ -40,6 +40,7 @@
 - 11/18 バズ斗戦30秒 → 見送り（同じ日に本編#29で同じ試合を出すと二度見になり、静止画の本編が見劣りする。ボス指摘11/18）。fight/buzuto_fight_30s.mp4・表紙 fight/buzuto_fight_cover.jpg は保存。再戦編が終わったあとの「名場面」やまとめで使う
 - 11/19 夜 白スーツ寿司ダンス（dance/dance_sushi_white_final.mp4）投稿・プロモート
 - 11/20(金)23:20頃 屋上リミックス（dance/dance_remix_final.mp4・表紙 dance_remix_cover.jpg）採用・ボスに送る予定
+- 11/21(土)夜 番長3人ダンス（dance/dance_banchou3_sd_final.mp4・表紙 dance_banchou3_sd_cover.jpg）普通画質のまま出す（ボス11/20）
 - 控え：大将姿の寿司ダンス（dance/dance_sushi_final.mp4）
 - 以降：新しく作る（OpenArt残高は毎回確認してから）
 - 【ルール】単発を出す前に、本編の何話と同日か確認（#21=11/10起点で+1日ずつ）。先の展開が見える動画はその話より前に出さない
