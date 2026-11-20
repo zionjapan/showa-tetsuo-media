@@ -40,7 +40,7 @@
 - 11/18 バズ斗戦30秒 → 見送り（同じ日に本編#29で同じ試合を出すと二度見になり、静止画の本編が見劣りする。ボス指摘11/18）。fight/buzuto_fight_30s.mp4・表紙 fight/buzuto_fight_cover.jpg は保存。再戦編が終わったあとの「名場面」やまとめで使う
 - 11/19 夜 白スーツ寿司ダンス（dance/dance_sushi_white_final.mp4）投稿・プロモート
 - 11/20(金)23:20頃 屋上リミックス（dance/dance_remix_final.mp4・表紙 dance_remix_cover.jpg）採用・ボスに送る予定
-- 11/22(日)夜 番長3人ダンス（dance/dance_banchou3_sd_final.mp4・表紙 dance_banchou3_sd_cover.jpg）普通画質のまま出す（ボス11/20）
+- 11/22(日)夜 番長3人ダンス（dance/dance_banchou3_sd_final.mp4・表紙 dance_banchou3_sd_cover.jpg）普通画質のまま出す（ボス11/20）【元ネタのタグ：#motivationalvideos #viralvideos #fyp #viral、検索ワード nobody can use my past against me（ボス11/20）】
 - 3連休の単発は金・日の夜だけ（土・月はなし。ボス11/20）
 - 控え：大将姿の寿司ダンス（dance/dance_sushi_final.mp4）
 - 以降：新しく作る（OpenArt残高は毎回確認してから）
