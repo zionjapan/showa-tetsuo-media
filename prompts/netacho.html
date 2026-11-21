@@ -1,0 +1,345 @@
+<title>鉄男ネタ帳</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=Zen+Kaku+Gothic+New:wght@500;700;900&display=swap">
+<style>
+/* 昭和の大学ノート：罫線の地に、お手本の動画を貼った札を並べる。やめた札は赤い判子で消す */
+:root{
+  --bg:#f5f1e8; --paper:#fffdf7; --ink:#231d17; --muted:#6f6457; --rule:#d9cfbd;
+  --red:#b3261e; --gold:#b8860b; --ok:#2f6b3a; --ok-bg:#e3efe2; --wait:#8a5a00; --wait-bg:#f6ead0;
+  --display:"Dela Gothic One","Hiragino Kaku Gothic StdN","Yu Gothic",sans-serif;
+  --body:"Zen Kaku Gothic New","Hiragino Kaku Gothic ProN","Yu Gothic",sans-serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#17130f; --paper:#221c16; --ink:#f3ece0; --muted:#b3a693; --rule:#3a3128;
+  --red:#e0574d; --gold:#e3b54a; --ok:#8fd19b; --ok-bg:#1f3323; --wait:#f0c56b; --wait-bg:#3a2d12; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#17130f; --paper:#221c16; --ink:#f3ece0; --muted:#b3a693; --rule:#3a3128;
+  --red:#e0574d; --gold:#e3b54a; --ok:#8fd19b; --ok-bg:#1f3323; --wait:#f0c56b; --wait-bg:#3a2d12; color-scheme:dark}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:15px;line-height:1.65}
+.wrap{max-width:760px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:24px 48px}
+h1{font-family:var(--display);font-weight:400;font-size:clamp(30px,8vw,44px);margin:0;letter-spacing:.04em}
+.lead{color:var(--muted);margin:6px 0 18px;font-weight:700}
+.sum{display:flex;flex-wrap:wrap;gap:10px 22px;padding:14px 16px;border-top:3px double var(--ink);border-bottom:3px double var(--ink);margin-bottom:10px;font-weight:700}
+.sum b{font-family:var(--display);font-weight:400;font-size:22px;color:var(--red);font-variant-numeric:tabular-nums}
+.note{font-size:13px;color:var(--muted);font-weight:700;margin:0 0 24px}
+h2{font-family:var(--display);font-weight:400;font-size:20px;margin:30px 0 12px;display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+h2 small{font-family:var(--body);font-size:13px;color:var(--muted);font-weight:700}
+.cards{display:grid;grid-template-columns:1fr;gap:16px}
+.card{position:relative;display:grid;grid-template-columns:132px 1fr;gap:14px;background:var(--paper);border:1px solid var(--rule);border-radius:10px;padding:12px;
+  background-image:repeating-linear-gradient(to bottom,transparent 0 27px,var(--rule) 27px 28px);background-position:0 10px;transition:opacity .2s}
+.media{position:relative}
+.media video,.media img,.media .blank{display:block;width:132px;max-width:100%;aspect-ratio:9/16;object-fit:cover;border-radius:6px;background:#000}
+.media .blank{background:var(--bg);border:1px dashed var(--rule);display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:12px;font-weight:900;text-align:center;padding:8px;box-sizing:border-box}
+.media span{position:absolute;left:6px;bottom:6px;font-size:11px;font-weight:900;background:rgba(0,0,0,.65);color:#fff;padding:1px 6px;border-radius:4px}
+.body{min-width:0}
+.top{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px}
+.top h3{margin:0;font-size:18px;font-weight:900;line-height:1.35}
+.chip{font-size:12px;font-weight:900;padding:2px 9px;border-radius:999px;white-space:nowrap}
+.chip.go{background:var(--ok-bg);color:var(--ok)}
+.chip.wait{background:var(--wait-bg);color:var(--wait)}
+.chip.new{background:var(--red);color:var(--paper)}
+.src{font-size:12px;color:var(--muted);margin:2px 0 6px;font-weight:700}
+.body p{margin:0 0 8px}
+dl{display:grid;grid-template-columns:auto 1fr;gap:2px 10px;margin:0;font-size:14px}
+dt{color:var(--muted);font-weight:700}
+dd{margin:0;font-weight:700;font-variant-numeric:tabular-nums}
+dd.cost{color:var(--red)}
+/* やめるチェック */
+.stop{display:inline-flex;align-items:center;gap:8px;margin-top:10px;padding:6px 12px;border:2px solid var(--rule);border-radius:8px;font-weight:900;font-size:14px;cursor:pointer;user-select:none;background:var(--paper)}
+.stop input{width:20px;height:20px;accent-color:var(--red);margin:0;cursor:pointer}
+.stop:has(input:focus-visible){outline:3px solid var(--gold);outline-offset:2px}
+.stop:has(input:disabled){opacity:.5;cursor:default}
+.card.off{opacity:.55}
+.card.off h3{text-decoration:line-through;text-decoration-color:var(--red);text-decoration-thickness:2px}
+.card.off .stop{border-color:var(--red);color:var(--red)}
+.hanko{display:none;position:absolute;right:12px;top:10px;font-family:var(--display);color:var(--red);border:3px solid var(--red);border-radius:6px;padding:0 8px;font-size:18px;transform:rotate(-8deg);background:var(--paper)}
+.card.off .hanko{display:block}
+.toggle{font-size:13px;font-weight:900;color:var(--muted);display:inline-flex;align-items:center;gap:6px;cursor:pointer}
+.toggle input{accent-color:var(--red)}
+.hideoff .card.off{display:none}
+.list{background:var(--paper);border:1px solid var(--rule);border-radius:10px;padding:6px 16px}
+.list li{padding:8px 0;border-bottom:1px dashed var(--rule)}
+.list li:last-child{border-bottom:0}
+.list ul{margin:0;padding:0;list-style:none}
+.list .d{display:inline-block;min-width:74px;font-weight:900;font-variant-numeric:tabular-nums}
+.list li.dyn{color:var(--red);font-weight:700}
+.rule{font-size:14px}
+.strip{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:12px}
+.strip figure{margin:0;min-width:0}
+.strip video{display:block;width:100%;aspect-ratio:9/16;object-fit:cover;border-radius:6px;background:#000}
+.strip figcaption{font-size:12px;font-weight:900;line-height:1.35;margin-top:4px}
+.strip figcaption em{display:block;font-style:normal;color:var(--muted);font-weight:700}
+@media (max-width:420px){.card{grid-template-columns:104px 1fr}.media video,.media img,.media .blank{width:104px}.strip{grid-template-columns:repeat(2,1fr)}}
+@media (prefers-reduced-motion:reduce){.card{transition:none}}
+</style>
+
+<div class="wrap" id="root">
+  <h1>鉄男ネタ帳</h1>
+  <p class="lead">思いついたらすぐ作らずに、ここに貯めてから選ぶ。動画はお手本（タップで再生）。やめる案は「やめる」にチェック。</p>
+  <div class="sum">
+    <div>残りクレジット <b>4,785</b></div>
+    <div>残っている案 <b id="left">13</b>件</div>
+    <div>2026年11月21日 時点</div>
+  </div>
+  <p class="note" id="status">チェックの読み込み中…</p>
+
+  <h2>次に出せる <small>3連休の日・月の候補</small></h2>
+  <div class="cards">
+    <article class="card" data-id="cart">
+      <div class="hanko">やめ</div>
+      <div class="media"><video src="cart.mp4" poster="cart.jpg" controls playsinline preload="none"></video><span>完成品</span></div>
+      <div class="body">
+        <div class="top"><h3>丸グラサン カート動画</h3><span class="chip go">作り済み・未投稿</span></div>
+        <div class="src">TikTokショップ／商品写真4枚＋鉄男3カット</div>
+        <p>鉄男がギロリ→グラサンを見せる→キメ。カートに入れてもらう売り物の動画。クレジットはもうかからない。</p>
+        <dl><dt>長さ</dt><dd>約15秒</dd><dt>クレジット</dt><dd class="cost">0（作り済み）</dd><dt>出せる日</dt><dd>いつでも</dd></dl>
+        <label class="stop"><input type="checkbox" id="stop-cart" disabled> やめる</label>
+      </div>
+    </article>
+    <article class="card" data-id="dunk">
+      <div class="hanko">やめ</div>
+      <div class="media"><video src="dunk.mp4" poster="dunk.jpg" controls playsinline preload="none"></video><span>お手本</span></div>
+      <div class="body">
+        <div class="top"><h3>バスケのソロダンク</h3><span class="chip new">新</span><span class="chip wait">服を決めたら作る</span></div>
+        <div class="src">お手本：11/21に届いたバスケ動画（1人・真ん中）</div>
+        <p>鉄男が1人でドリブルからダンク。昭和の男がコートで本気を出す。服は花柄シャツがおすすめ（学ランも可）。Seedanceの画像から動画で作る。</p>
+        <dl><dt>長さ</dt><dd>10秒</dd><dt>クレジット</dt><dd class="cost">1,300（720p）</dd><dt>服</dt><dd>未定（花柄おすすめ）</dd></dl>
+        <label class="stop"><input type="checkbox" id="stop-dunk" disabled> やめる</label>
+      </div>
+    </article>
+  </div>
+
+  <h2>進行中 <small>画像ができたら作る</small></h2>
+  <div class="cards">
+    <article class="card" data-id="hotel">
+      <div class="hanko">やめ</div>
+      <div class="media"><video src="hotel.mp4" poster="hotel.jpg" controls playsinline preload="none"></video><span>お手本</span></div>
+      <div class="body">
+        <div class="top"><h3>ホテルに乗り付ける</h3><span class="chip wait">保留（画像は完成）</span></div>
+        <div class="src">お手本：Mr.AI（12.3万いいね・シェア10.4万）</div>
+        <p>黒塗りの車から白い足袋で降りて、高下駄に足を入れ、ドアマンから黒いロングコートを受け取ってホテルへ。ボケは高下駄だけ。海外で当たった型なので日本語は入れない（字幕は英語「I don't change.」か無し）。ボスは「失敗しそう」で保留。</p>
+        <dl><dt>長さ</dt><dd>約13秒</dd><dt>クレジット</dt><dd class="cost">約650（軽い版）</dd><dt>出せる日</dt><dd>いつでも</dd></dl>
+        <label class="stop"><input type="checkbox" id="stop-hotel" disabled> やめる</label>
+      </div>
+    </article>
+  </div>
+
+  <h2>検討中 <small>ボスが選んだら作る</small></h2>
+  <div class="cards">
+    <article class="card" data-id="lipsync">
+      <div class="hanko">やめ</div>
+      <div class="media"><video src="lipsync.mp4" poster="lipsync.jpg" controls playsinline preload="none"></video><span>お手本</span></div>
+      <div class="body">
+        <div class="top"><h3>口パクのアップ</h3><span class="chip new">新</span><span class="chip wait">検討中</span></div>
+        <div class="src">お手本：11/19に届いた3本のうちの1本</div>
+        <p>顔のアップで曲に合わせて口パク。口を大きく開けない曲を選ぶこと（大きく開ける型は鉄男に合わない）。</p>
+        <dl><dt>長さ</dt><dd>約10〜15秒</dd><dt>クレジット</dt><dd class="cost">約1,300〜1,955</dd><dt>注意</dt><dd>曲名とハッシュタグを先に確認</dd></dl>
+        <label class="stop"><input type="checkbox" id="stop-lipsync" disabled> やめる</label>
+      </div>
+    </article>
+    <article class="card" data-id="footwork">
+      <div class="hanko">やめ</div>
+      <div class="media"><div class="blank">お手本<br>まだ無し</div></div>
+      <div class="body">
+        <div class="top"><h3>フットワーク Lv1〜5</h3><span class="chip new">新</span><span class="chip wait">お手本待ち</span></div>
+        <div class="src">お手本：これから探す</div>
+        <p>Lv1は昭和の盆踊りくらい、Lv5で本気のフットワーク。段階ごとに字幕を出して、最後に鉄男がドヤ顔。</p>
+        <dl><dt>長さ</dt><dd>約15秒</dd><dt>クレジット</dt><dd class="cost">約1,955（15秒）</dd><dt>服・場所</dt><dd>未定</dd></dl>
+        <label class="stop"><input type="checkbox" id="stop-footwork" disabled> やめる</label>
+      </div>
+    </article>
+    <article class="card" data-id="footwork3">
+      <div class="hanko">やめ</div>
+      <div class="media"><div class="blank">お手本<br>まだ無し</div></div>
+      <div class="body">
+        <div class="top"><h3>3人フットワーク</h3><span class="chip new">新</span><span class="chip wait">お手本待ち</span></div>
+        <div class="src">番長3人ダンスと同じく子分2人と</div>
+        <p>鉄男が真ん中、両横に子分。両横は別の顔にする（同じ顔はパクリすぎ）。</p>
+        <dl><dt>長さ</dt><dd>約15〜30秒</dd><dt>クレジット</dt><dd class="cost">30秒720pで4,560</dd><dt>注意</dt><dd>髪型が違う人の入れ替えはしない</dd></dl>
+        <label class="stop"><input type="checkbox" id="stop-footwork3" disabled> やめる</label>
+      </div>
+    </article>
+    <article class="card" data-id="seifu">
+      <div class="hanko">やめ</div>
+      <div class="media"><div class="blank">お手本<br>まだ無し</div></div>
+      <div class="body">
+        <div class="top"><h3>清風のリクエスト 1本</h3><span class="chip new">新</span><span class="chip wait">中身を決める</span></div>
+        <div class="src">コメントのリクエストから</div>
+        <p>リクエストに応える回を1本。コメントした人が見に来てくれるので、返信と合わせて出す。</p>
+        <dl><dt>長さ</dt><dd>未定</dd><dt>クレジット</dt><dd class="cost">未見積もり</dd><dt>出せる日</dt><dd>未定</dd></dl>
+        <label class="stop"><input type="checkbox" id="stop-seifu" disabled> やめる</label>
+      </div>
+    </article>
+    <article class="card" data-id="club">
+      <div class="hanko">やめ</div>
+      <div class="media"><video src="club.mp4" poster="club.jpg" controls playsinline preload="none"></video><span>お手本</span></div>
+      <div class="body">
+        <div class="top"><h3>六本木のクラブでDJ（鉄檻アフターパーティー）</h3><span class="chip wait">お手本を男性に変えるなら</span></div>
+        <div class="src">お手本：SARRA（女性なのでこのままは使わない）</div>
+        <p>クラブのDJブースで、鉄男が花柄シャツでDJ。後ろで観客が手を上げて盛り上がる。試合の勝ったあとの「鉄檻アフターパーティー」で本編とつながる。</p>
+        <dl><dt>長さ</dt><dd>約14.5秒</dd><dt>クレジット</dt><dd class="cost">約1,955（15秒720p）</dd><dt>注意</dt><dd>観客が多いので顔が崩れやすい</dd></dl>
+        <label class="stop"><input type="checkbox" id="stop-club" disabled> やめる</label>
+      </div>
+    </article>
+    <article class="card" data-id="mood">
+      <div class="hanko">やめ</div>
+      <div class="media"><video src="mood.mp4" poster="mood.jpg" controls playsinline preload="none"></video><span>お手本</span></div>
+      <div class="body">
+        <div class="top"><h3>MOODダンス 1人版</h3><span class="chip wait">検討中</span></div>
+        <div class="src">お手本：Tony_boubini（21.4万いいね）</div>
+        <p>鉄男1人で、同じ曲・同じ振り。下からあおる構図はフランキーダンスと同じ当たり型。</p>
+        <dl><dt>長さ</dt><dd>約13秒</dd><dt>クレジット</dt><dd class="cost">約1,955（15秒720p）</dd><dt>服・場所</dt><dd>未定</dd></dl>
+        <label class="stop"><input type="checkbox" id="stop-mood" disabled> やめる</label>
+      </div>
+    </article>
+    <article class="card" data-id="toctoc2">
+      <div class="hanko">やめ</div>
+      <div class="media"><video src="toctoc.mp4" poster="sento.jpg" controls playsinline preload="none"></video><span>お手本</span></div>
+      <div class="body">
+        <div class="top"><h3>トクトクダンス 銭湯版・河原版</h3><span class="chip wait">検討中</span></div>
+        <div class="src">お手本：Leopold（101万いいね）／画像は準備済み</div>
+        <p>スーツ版と同じ振りで、銭湯の脱衣所（タンクトップにステテコ）と河原（ジャージ）の2本。</p>
+        <dl><dt>長さ</dt><dd>約10秒×2本</dd><dt>クレジット</dt><dd class="cost">各1,300</dd><dt>出せる日</dt><dd>いつでも</dd></dl>
+        <label class="stop"><input type="checkbox" id="stop-toctoc2" disabled> やめる</label>
+      </div>
+    </article>
+    <article class="card" data-id="tire">
+      <div class="hanko">やめ</div>
+      <div class="media"><video src="tire.mp4" poster="tire.jpg" controls playsinline preload="none"></video><span>お手本</span></div>
+      <div class="body">
+        <div class="top"><h3>河原の昭和特訓</h3><span class="chip wait">検討中</span></div>
+        <div class="src">お手本：チマエフの練習動画</div>
+        <p>エンジのジャージに白ハチマキで、河原でハンマーをタイヤに叩きつけ、タイヤをひっくり返す。</p>
+        <dl><dt>長さ</dt><dd>約14秒</dd><dt>クレジット</dt><dd class="cost">約1,955（15秒720p）</dd><dt>出せる日</dt><dd>いつでも</dd></dl>
+        <label class="stop"><input type="checkbox" id="stop-tire" disabled> やめる</label>
+      </div>
+    </article>
+    <article class="card" data-id="grapple">
+      <div class="hanko">やめ</div>
+      <div class="media"><video src="grapple.mp4" poster="grapple.jpg" controls playsinline preload="none"></video><span>お手本</span></div>
+      <div class="body">
+        <div class="top"><h3>MMA練習（組み技とミット打ち）</h3><span class="chip wait">検討中</span></div>
+        <div class="src">お手本：チマエフの公開練習</div>
+        <p>弟子のZEROを投げて寝技 → ミット打ち。黒Tシャツに黒短パン、昭和のジムにマットを敷いた場所。#26からの細マッチョの体で。</p>
+        <dl><dt>長さ</dt><dd>約12秒</dd><dt>クレジット</dt><dd class="cost">約1,300〜1,955</dd><dt>出せる日</dt><dd>いつでも</dd></dl>
+        <label class="stop"><input type="checkbox" id="stop-grapple" disabled> やめる</label>
+      </div>
+    </article>
+    <article class="card" data-id="ko">
+      <div class="hanko">やめ</div>
+      <div class="media"><video src="ko.mp4" poster="ko.jpg" controls playsinline preload="none"></video><span>お手本</span></div>
+      <div class="body">
+        <div class="top"><h3>残りの試合動画（氷室戦・鬼塚再戦）</h3><span class="chip wait">検討中</span></div>
+        <div class="src">お手本：ブレイキングダウンのKO集</div>
+        <p>#32の山嵐戦のように、本編の途中に殴る所だけ動画で入れる形がいちばん安い。作ったら最初から最後まで動きを確認してから使う。</p>
+        <dl><dt>長さ</dt><dd>本編に4秒〜／単発30秒</dd><dt>クレジット</dt><dd class="cost">10秒1,300／30秒4,560</dd><dt>出せる日</dt><dd>本編の試合回に合わせる</dd></dl>
+        <label class="stop"><input type="checkbox" id="stop-ko" disabled> やめる</label>
+      </div>
+    </article>
+  </div>
+
+  <h2>作り済み <small>出した日</small></h2>
+  <div class="strip">
+    <figure><video src="sushi.mp4" poster="sushi.jpg" controls playsinline preload="none"></video><figcaption>寿司ダンス 白スーツ<em>11/19</em></figcaption></figure>
+    <figure><video src="remix.mp4" poster="remix.jpg" controls playsinline preload="none"></video><figcaption>屋上リミックス<em>11/20「バク転に挑戦!!」</em></figcaption></figure>
+    <figure><video src="banchou.mp4" poster="banchou.jpg" controls playsinline preload="none"></video><figcaption>番長3人ダンス<em>11/21</em></figcaption></figure>
+    <figure><video src="cart.mp4" poster="cart.jpg" controls playsinline preload="none"></video><figcaption>丸グラサン カート<em>未投稿</em></figcaption></figure>
+  </div>
+  <div class="list"><ul>
+    <li><span class="d">11/2(月)</span>入場</li>
+    <li><span class="d">11/3(祝)</span>トクトクダンス スーツ版</li>
+    <li><span class="d">11/8(日)</span>サンドバッグ ジャージ版</li>
+    <li><span class="d">11/14(土)</span>サンドバッグ タイソン版</li>
+    <li><span class="d">11/18(水)</span>バズ斗戦の動画（単発をやめて本編#29の途中に入れた）</li>
+    <li><span class="d">11/19(木)</span>ラップデビュー「昭和から来た男」</li>
+    <li><span class="d">11/19(木)</span>寿司ダンス 白スーツ（プロモート：1人52円で止めた）</li>
+    <li><span class="d">11/20(金)</span>屋上リミックス（プロモートなしで12時間625回）</li>
+    <li><span class="d">11/21(土)</span>番長3人ダンス（Seedanceで作り直し）</li>
+    <li><span class="d">11/21(土)</span>本編#32に山嵐戦の殴る所4秒</li>
+    <li><span class="d">控え</span>寿司ダンス 大将版・バズ斗戦の予告・未来の鉄男</li>
+  </ul></div>
+
+  <h2>やらないと決めたもの</h2>
+  <div class="list"><ul id="stoppedList">
+    <li>レンガのおじいさんダンス（入れ替えで顔が貼り付けたようになり、鉄男が端で切れた）</li>
+    <li>番長3人の入れ替え版（お手本の髪型でアフロになった → Seedanceで作り直して出した）</li>
+    <li>バスケの1対1（2人の絡みが崩れやすい）</li>
+    <li>夕日のビーチでDJ（女性のお手本で動きがなよなよ、歌で口が開きすぎ）</li>
+    <li>自撮りで英語の歌を熱唱（口を大きく開ける型は鉄男に合わない）</li>
+    <li>3人のMOODダンス</li>
+    <li>サンドバッグの修行前後をつなげた1本（別々に出す）</li>
+    <li>Seedance無制限の怪しいサイト（OmniRogue）</li>
+    <li>中国本土（抖音）向け</li>
+  </ul></div>
+
+  <h2>決め方</h2>
+  <div class="list rule"><ul>
+    <li>作る前に、長さ・服・場所・クレジットを提案して、ボスが決める。「作って」と言われるまで作らない</li>
+    <li>ダンスは最初から <b>Seedance</b>（お手本の動画＋鉄男の画像）で、<b>720p</b>。480pは漫画っぽくなる</li>
+    <li>入れ替え（スワップ）は、1人で真ん中に映っていて髪型が鉄男に近いお手本だけ</li>
+    <li>説明文の先頭に、元ネタのハッシュタグと曲名を必ず入れる。画面で読めなければボスに聞く</li>
+    <li>表紙でオチをバラさない（例：屋上リミックスは「バク転に挑戦!!」）</li>
+    <li>有料で作った動画は、最後だけでなく最初から最後まで動きを確認する</li>
+    <li>お手本は男性で、真顔かドヤ顔のもの。女性のお手本、口を大きく開けるお手本は使わない</li>
+    <li>プロモートは1時間以上たってから判断。1人あたり <b>20円以下＝当たり</b>／40円以上は止める。3連休はプロモートなしで様子を見る</li>
+  </ul></div>
+</div>
+
+<script>
+(function(){
+  var root=document.getElementById('root');
+  var status=document.getElementById('status');
+  var cards=[].slice.call(document.querySelectorAll('.card[data-id]'));
+  var stopped={};
+  function render(){
+    var left=0;
+    cards.forEach(function(c){
+      var on=!!stopped[c.dataset.id];
+      c.classList.toggle('off',on);
+      var cb=c.querySelector('.stop input'); if(cb) cb.checked=on;
+      if(!on) left++;
+    });
+    document.getElementById('left').textContent=left;
+    var ul=document.getElementById('stoppedList');
+    [].slice.call(ul.querySelectorAll('li.dyn')).forEach(function(li){li.remove()});
+    cards.forEach(function(c){
+      if(stopped[c.dataset.id]){
+        var li=document.createElement('li'); li.className='dyn';
+        li.textContent=c.querySelector('h3').textContent+'（チェックでやめた）';
+        ul.insertBefore(li,ul.firstChild);
+      }
+    });
+  }
+  var timer=setTimeout(function(){status.textContent='チェックを読み込めませんでした。開き直すと直ることがあります。'},10000);
+  function off(msg){clearTimeout(timer);status.textContent=msg}
+  if(!window.claude||!window.claude.use){off('このページではチェックを保存できません（claude.aiで開いてください）。');return}
+  window.claude.use('db').then(function(db){
+    if(!db){off('サインインするとチェックを保存できます。');return}
+    var col=db.collection('stopped');
+    col.onSnapshot(function(snap){
+      clearTimeout(timer);
+      var next={};
+      snap.docs.forEach(function(d){var v=d.data(); if(v&&v.stopped===true) next[d.id]=true});
+      stopped=next; render();
+      cards.forEach(function(c){var cb=c.querySelector('.stop input'); if(cb&&!cb.dataset.busy) cb.disabled=false});
+      status.textContent='チェックは保存され、ほかの端末でも同じに見えます。';
+    },function(){off('チェックを読み込めませんでした。開き直すと直ることがあります。')});
+    cards.forEach(function(c){
+      var cb=c.querySelector('.stop input'); if(!cb) return;
+      cb.addEventListener('change',function(){
+        var id=c.dataset.id, val=cb.checked;
+        stopped[id]=val; render();
+        cb.disabled=true; cb.dataset.busy='1';
+        col.doc(id).set({stopped:val,at:Date.now()}).then(function(){
+          cb.disabled=false; delete cb.dataset.busy;
+        },function(){
+          stopped[id]=!val; render(); cb.disabled=false; delete cb.dataset.busy;
+          status.textContent='保存できませんでした。この人は書き込めない設定かもしれません。';
+        });
+      });
+    });
+  });
+})();
+</script>
