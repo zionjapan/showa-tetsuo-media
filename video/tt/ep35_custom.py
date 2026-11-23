@@ -10,7 +10,7 @@ tt2.TITLES[n] = '残り10秒、昭和ゲンコツ'
 # 時間は実際の秒どおり：カウントは1秒に1つ、試合時計は立ち上がって再開してから1秒に1つ減り、KOの瞬間に止まる
 # (画像, 秒, 字幕, 'count'/'tatsu'/'clock'/'ko'/None, 揺れ)
 SHOTS = [
-    ('ep35/35-0_kick.png', 4.0, ['データ通りの', 'ハイキック'], None, False),
+    ('ep35/35-0_kick.png', 4.0, ['データ通りの', 'ハイキック'], 'kick', False),
     ('ep35/35-1_hiza.png', 7.0, ['ダウン', 'データ通り、もう立てない'], 'count', False),
     ('ep35/35-1b_tatsu.png', 5.0, ['……立った!?', 'データにない', '残りの1.3%、それが昭和だ'], 'tatsu', False),
     ('ep35/35-2a_tackle.png', 4.0, ['とどめのタックル', '……上ががら空きだ'], 'clock', False),
@@ -28,9 +28,9 @@ def clock(fr, sec):
 f_cnt = ImageFont.truetype(F, 200)
 def count(fr, c):
     d = ImageDraw.Draw(fr)
-    lab = 'カウント'; d.text((CX - d.textlength(lab, font=f_clab) / 2, 250), lab, font=f_clab, fill=(255, 200, 60), stroke_width=5, stroke_fill='black')
+    lab = 'カウント'; d.text((CX - d.textlength(lab, font=f_clab) / 2, 470), lab, font=f_clab, fill=(255, 200, 60), stroke_width=5, stroke_fill='black')
     t = str(c); w = d.textlength(t, font=f_cnt)
-    d.text((CX - w / 2, 290), t, font=f_cnt, fill=(255, 60, 60) if c >= 8 else 'white', stroke_width=10, stroke_fill='black')
+    d.text((CX - w / 2, 510), t, font=f_cnt, fill=(255, 60, 60) if c >= 8 else 'white', stroke_width=10, stroke_fill='black')
 out = fname(n); p = pipe(OUT + out)
 fr = None
 random.seed(1)
@@ -52,11 +52,14 @@ for si, (f, sec, lines, clk, shake) in enumerate(SHOTS):
         fr.alpha_composite(band(n)); fr = fr.convert('RGB')
         d = ImageDraw.Draw(fr)
         t = i / FPS
-        if clk == 'count':
-            count(fr, min(7, 1 + int(t)))
+        # 試合の時計は止まらずに1秒ずつ減り続ける。ダウン中も進み、立った時がちょうど残り10秒、KOの0:02で止まる
+        if clk == 'kick':
+            if si != 0 or i >= int(1.5 * FPS): clock(fr, 22 - int(t))
+        elif clk == 'count':
+            clock(fr, 18 - int(t)); count(fr, min(7, 1 + int(t)))
         elif clk == 'tatsu':
+            clock(fr, 11 - int(t))
             if t < 1: count(fr, 8)
-            else: clock(fr, 10 - int(t - 1))
         elif clk == 'clock':
             clock(fr, 6 - int(t))
         elif clk == 'ko':
