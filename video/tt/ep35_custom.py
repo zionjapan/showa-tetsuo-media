@@ -7,14 +7,14 @@ from PIL import Image, ImageDraw, ImageFont
 P = '/home/claude/showa-tetsuo-media/posts/'
 n = 35
 tt2.TITLES[n] = '残り10秒、昭和ゲンコツ'
-# (画像, 秒, 字幕, 残り秒の表示(始,終) or None, 揺れ)
-# (画像, 秒, 字幕, ('clock',始,終) or ('count',始,終) or None, 揺れ)
+# 時間は実際の秒どおり：カウントは1秒に1つ、試合時計は立ち上がって再開してから1秒に1つ減り、KOの瞬間に止まる
+# (画像, 秒, 字幕, 'count'/'tatsu'/'clock'/'ko'/None, 揺れ)
 SHOTS = [
-    ('ep35/35-0_kick.png', 5.0, ['データ通りの', 'ハイキック'], None, False),
-    ('ep35/35-1_hiza.png', 5.0, ['ダウン', 'データ通り、もう立てない'], ('count', 1, 7), False),
-    ('ep35/35-1b_tatsu.png', 5.5, ['……立った!?', 'データにない', '残りの1.3%、それが昭和だ'], ('count', 8, 8), False),
-    ('ep35/35-2a_tackle.png', 3.5, ['とどめのタックル', '……上ががら空きだ'], ('clock', 10, 2), False),
-    ('ep35/35-2b_genkotsu.png', 5.0, ['昭和ゲンコツ！！', '3人抜き、達成'], ('clock', 1, 1), True),
+    ('ep35/35-0_kick.png', 4.0, ['データ通りの', 'ハイキック'], None, False),
+    ('ep35/35-1_hiza.png', 7.0, ['ダウン', 'データ通り、もう立てない'], 'count', False),
+    ('ep35/35-1b_tatsu.png', 5.0, ['……立った!?', 'データにない', '残りの1.3%、それが昭和だ'], 'tatsu', False),
+    ('ep35/35-2a_tackle.png', 4.0, ['とどめのタックル', '……上ががら空きだ'], 'clock', False),
+    ('ep35/35-2b_genkotsu.png', 4.0, ['昭和ゲンコツ！！', '3人抜き、達成'], 'ko', True),
 ]
 f_clock = ImageFont.truetype(F, 120); f_clab = ImageFont.truetype(F, 44)
 def clock(fr, sec):
@@ -51,14 +51,16 @@ for si, (f, sec, lines, clk, shake) in enumerate(SHOTS):
             big_title(fr, n); p.stdin.write(fr.convert('RGB').tobytes()); continue
         fr.alpha_composite(band(n)); fr = fr.convert('RGB')
         d = ImageDraw.Draw(fr)
-        if clk:
-            kind, s0, s1 = clk
-            if kind == 'clock':
-                s = s0 - int((s0 - s1 + 1) * i / nfr) if s0 != s1 else s0
-                clock(fr, max(s1, s))
-            else:
-                c = s0 + int((s1 - s0 + 1) * i / nfr) if s0 != s1 else s0
-                count(fr, min(s1, c))
+        t = i / FPS
+        if clk == 'count':
+            count(fr, min(7, 1 + int(t)))
+        elif clk == 'tatsu':
+            if t < 1: count(fr, 8)
+            else: clock(fr, 10 - int(t - 1))
+        elif clk == 'clock':
+            clock(fr, 6 - int(t))
+        elif clk == 'ko':
+            clock(fr, 2)
         shown = lines[:1 + min(len(lines) - 1, int(i / (nfr / len(lines))))]
         subs(d, lines, shown)
         p.stdin.write(fr.tobytes())
