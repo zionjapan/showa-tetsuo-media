@@ -18,3 +18,8 @@
 - 鉄男：posts/identity/tetsuo_front.png
 - 鬼塚：posts/identity/onizuka_front.png
 - ZERO：posts/identity/zero_front.png（27-0から切り出し）
+
+## 11/26 静止画版 完成
+- 画像8枚そろった。フォルダを付け替え：旧ep44→ep46、旧ep45→ep47、新ep44・ep45
+- 本編 #43〜#47（12/2〜12/6）を作り直し、表紙も焼いた。旧動画は video/tt/old/
+- 次：ボスが流れを確認 → 動画にするか（A・B・C）を決める
