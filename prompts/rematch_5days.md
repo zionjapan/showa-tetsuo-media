@@ -40,3 +40,4 @@ A BreakingDown-style fighter entrance. The tall square punch-perm fighter with a
 
 ## 3連休の単発（11/26 ボス）：今夜ダンク／11/27昼 ジャグリング（商店街版、ref_juggle15.mp4 15秒30fps、最初のコマ posts/single/juggle/ref_first_frame.png）／11/28夜 トレンドから1本
 - 11/26 動画を本編に組み込み：#42入場（24秒）、#45殴り合い→溜め（18秒）、#46 溜め→KO編集版→ベルト→握手（表紙の帯で当たる瞬間が隠れないよう溜めの静止画を先頭に）
+- 11/27 6:00 Metricool：12/5 #42（入場動画入り）・12/6 #43（1R終了）の旧版を新しい動画と文に差し替え。IG/YT/Xとも12/6まで予約あり。OpenArt残高2,545
