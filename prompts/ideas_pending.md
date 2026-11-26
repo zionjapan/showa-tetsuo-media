@@ -115,3 +115,4 @@
 - 注意：11/8サンドバッグ ジャージ版・11/14タイソン版を出している → 白黒＋1色の見た目とコンビネーションで別物にする
 
 ## なわとび Level1〜9（11/26 21:55 ボスが録画、FIGHTER MECHANICS 11-17、1万いいね）：video/dance/refs/ref_1126_2153_raw.mp4（約21秒）。曲「Jus…」（歌詞 Shady, aftermath）。サンドバッグと別に作るか確認中
+- 11/26 22:03 サンドバッグ依頼 pgURKMOZORWgVhzSZTFE（カラー・サングラスなし、tetsuo_first.png＋tetsuo_front＋ref_bag9、9秒720p）。ボス：白黒は肌が黒く見えるのでNG、サングラス不要
