@@ -93,3 +93,8 @@
 ## バスケのダンク（お手本 ref_1121_0941/0956、Mxna）
 - 元ネタの説明文：「女の子はバスケできないって誰が言ったの？😳🏀 #bas…（#basketball と思われる）」、音源アイコンに「IN THE CLUB」
 - 11/26 dunk2 完成（video/dance/dunk2_final.mp4・dunk2_cover.jpg）。11/26夜に単発で出す。丸サングラス着用→カートを付ける
+
+## 廊下ダンス（11/26 ボスが画面録画、Bisoù 10-29、21.2万いいね）
+- 元ネタのハッシュタグ：#pourtoi #humour #bisou #midas／曲「Toc…」（トクトク系。11/3にトクトクダンス スーツ版を出している）
+- お手本：video/dance/refs/ref_bisou11.mp4（0.55〜11.55秒、1カット、30fps）、最初のコマ posts/single/bisou/ref_first_frame.png
+- 服はお手本のまま（白シャツ・黒ベスト・黒ネクタイ・黄色のゴム手袋）、メガネ→鉄男の丸サングラス（カート）
