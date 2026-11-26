@@ -102,3 +102,4 @@
 - 11/26 完成 video/dance/bisou_final.mp4・bisou_cover.jpg（お手本とほぼ同じ動き）
 - 11/26 作り直し依頼 8zB5saOYYK5Ah8HGxbLv（顔モザイクのお手本＋tetsuo_front）
 - 11/26 作り直し完成 bisou2_final.mp4（全コマ顔チェック済み）／NBA風ダンク依頼 WDafiU54YWgv5mYFhVp4（15秒、nba_beach＋tetsuo_front＋hoop_crowd＋ref_dunk15_noface）
+- 11/26 16:10 NBA風ダンク作り直し 5iZW2197eP5KpyfgTxLh（スリーブなし nba_beach2）。教訓：片腕だけの小物（スリーブ等）は場面で左右がずれる→使わない
