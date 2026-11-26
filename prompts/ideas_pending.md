@@ -117,3 +117,4 @@
 ## なわとび Level1〜9（11/26 21:55 ボスが録画、FIGHTER MECHANICS 11-17、1万いいね）：video/dance/refs/ref_1126_2153_raw.mp4（約21秒）。曲「Jus…」（歌詞 Shady, aftermath）。サンドバッグと別に作るか確認中
 - 11/26 22:03 サンドバッグ依頼 pgURKMOZORWgVhzSZTFE（カラー・サングラスなし、tetsuo_first.png＋tetsuo_front＋ref_bag9、9秒720p）。ボス：白黒は肌が黒く見えるのでNG、サングラス不要
 - 11/26 22:08 サンドバッグ1回目 bag2_raw.mp4：ハチマキが目にかかる場面（マネキンの目隠しをまねた）、後ろに黒い顔なしマネキンが立っている、髪が丸め・顔が若め。→直すならお手本の頭をモザイク、後ろの人なしを指示
+- 11/26 22:13 なわとび河川敷 15秒 依頼 UALjqSaUeFfKrHgvqfQ8（tetsuo_kawara＋tetsuo_front＋ref_rope15_nohead＝頭モザイク・歌詞ぼかし）。サンドバッグ背景差し替え uGT75FUMBsfUoIWj3G76（175）
