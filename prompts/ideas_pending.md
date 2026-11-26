@@ -98,3 +98,4 @@
 - 元ネタのハッシュタグ：#pourtoi #humour #bisou #midas／曲「Toc…」（トクトク系。11/3にトクトクダンス スーツ版を出している）
 - お手本：video/dance/refs/ref_bisou11.mp4（0.55〜11.55秒、1カット、30fps）、最初のコマ posts/single/bisou/ref_first_frame.png
 - 服はお手本のまま（白シャツ・黒ベスト・黒ネクタイ・黄色のゴム手袋）、メガネ→鉄男の丸サングラス（カート）
+- 11/26 15:35 依頼 JIAEoDwf1LqtOVwgOgPk（tetsuo_first.png＋ref_bisou11、720p・11秒）
