@@ -104,3 +104,4 @@
 - 11/26 作り直し完成 bisou2_final.mp4（全コマ顔チェック済み）／NBA風ダンク依頼 WDafiU54YWgv5mYFhVp4（15秒、nba_beach＋tetsuo_front＋hoop_crowd＋ref_dunk15_noface）
 - 11/26 16:10 NBA風ダンク作り直し 5iZW2197eP5KpyfgTxLh（スリーブなし nba_beach2）。教訓：片腕だけの小物（スリーブ等）は場面で左右がずれる→使わない
 - 11/26 ボス決定：ダンクは dunk3_left.mp4（②スリーブあり版から右手ダンクを外した12秒）＋ dunk3_left_cover.jpg で出す
+- 11/26 訂正：11/27は普通の金曜（連休ではない）。ダンクはボスが 11/27(金) 22:00 にTikTok予約済み
