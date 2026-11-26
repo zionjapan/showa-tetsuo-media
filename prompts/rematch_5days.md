@@ -37,3 +37,5 @@ Inside a packed MMA cage arena, both fighters load their final right punch one s
 A BreakingDown-style fighter entrance. The tall square punch-perm fighter with a thin mustache, a white towel over his shoulders, white belly wrap, black shorts and black MMA gloves walks out of a dark tunnel through thick white smoke into a blinding spotlight. Red strobe lights flash, phone flashlights and camera flashes fill the crowd on both sides of the walkway, fans lean over the railings screaming. He walks slowly and confidently with a small smirk, the camera tracking backward in front of him at a low angle. At the end he pulls the towel off, throws it aside, and glares straight ahead at the cage. Realistic, cinematic, no text.
 - 11/26 9:00 チャージ後（残高20,985）3本同時に依頼：入場 DbCu76GZwha6qmCEm0jH／#45殴り合い hF618d4L6Hh4PCm8QOl7／#46KO se8uhXdQRhPf4qMmDKzM（720p・10秒・9:16・音あり）
 - 11/26 9:05 ダンク作り直し依頼 N5giUEWJ8u5JW7GD2ilM（basket_beach＋hoop_crowd＋ref_dunk10、720p・10秒・adaptive）
+
+## 3連休の単発（11/26 ボス）：今夜ダンク／11/27昼 ジャグリング（商店街版、ref_juggle15.mp4 15秒30fps、最初のコマ posts/single/juggle/ref_first_frame.png）／11/28夜 トレンドから1本
