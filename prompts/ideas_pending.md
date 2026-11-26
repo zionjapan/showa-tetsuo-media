@@ -100,3 +100,4 @@
 - 服はお手本のまま（白シャツ・黒ベスト・黒ネクタイ・黄色のゴム手袋）、メガネ→鉄男の丸サングラス（カート）
 - 11/26 15:35 依頼 JIAEoDwf1LqtOVwgOgPk（tetsuo_first.png＋ref_bisou11、720p・11秒）
 - 11/26 完成 video/dance/bisou_final.mp4・bisou_cover.jpg（お手本とほぼ同じ動き）
+- 11/26 作り直し依頼 8zB5saOYYK5Ah8HGxbLv（顔モザイクのお手本＋tetsuo_front）
