@@ -39,3 +39,4 @@ A BreakingDown-style fighter entrance. The tall square punch-perm fighter with a
 - 11/26 9:05 ダンク作り直し依頼 N5giUEWJ8u5JW7GD2ilM（basket_beach＋hoop_crowd＋ref_dunk10、720p・10秒・adaptive）
 
 ## 3連休の単発（11/26 ボス）：今夜ダンク／11/27昼 ジャグリング（商店街版、ref_juggle15.mp4 15秒30fps、最初のコマ posts/single/juggle/ref_first_frame.png）／11/28夜 トレンドから1本
+- 11/26 動画を本編に組み込み：#42入場（24秒）、#45殴り合い→溜め（18秒）、#46 溜め→KO編集版→ベルト→握手（表紙の帯で当たる瞬間が隠れないよう溜めの静止画を先頭に）

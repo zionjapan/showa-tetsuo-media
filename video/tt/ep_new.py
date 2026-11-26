@@ -1,5 +1,5 @@
 # 本編 #19〜#47（初黒星編〜再戦編）TikTok縦版
-import sys
+import sys, subprocess
 sys.path.insert(0, '/tmp/claude-0/-home-claude/9d5ec005-9cc8-52f5-9eca-474a40bf5cb4/scratchpad')
 import tt2
 from tt2 import *
@@ -108,7 +108,7 @@ EP = {
    ('ep41/41-1_nirami.png', 0.5, ['ジジイ、まだ生きてたか', '今度は倒れねぇ', 'てめぇがな']),
    ('ep41/vs_onizuka_rematch.png', POSTER, [])]),
  42: ('再戦ゴング、/今度は見えてる', [
-   ('ep42/42-1_nyujo.png', 0.5, ['挑戦者', '昭和から来た男', '今度は、迷わねぇ']),
+   ('VIDEO:video/fight/nyujo_raw.mp4', 0.5, ['挑戦者', '昭和から来た男', '今度は、迷わねぇ']),
    ('ep42/42-2_kawasu.png', 0.5, ['王者の豪腕を', 'かわす', '見えてるぜ']),
    ('ep42/42-3_hook.png', 0.5, ['右を打つ瞬間', '空いた左あご', 'そこだ！！'])]),
  43: ('1R終了、/王者の目が変わる', [
@@ -120,11 +120,11 @@ EP = {
    ('ep44/44-2_kanaami.png', 0.5, ['金網に追いつめられ', 'ガードの上から', '連打、連打']),
    ('ep44/44-3_warau.png', 0.5, ['……効いてねぇぞ', '来いよ', 'ヒヨッコ'])]),
  45: ('最終ラウンド、/残り10秒', [
-   ('ep45/45-1_aiuchi.png', 0.5, ['最終ラウンド', '足を止めて', '打ち合い']),
-   ('ep45/45-2_furafura.png', 0.5, ['ひざが笑ってる', 'お互いに', 'あと一発']),
+   ('VIDEO:video/fight/ep45_naguriai_raw.mp4', 0.5, ['最終ラウンド', '足を止めて、打ち合い', '相打ち！！']),
    ('ep45/45-3_tame.png', 0.5, ['残り10秒', '最後の一発', '昭和の拳だ'])]),
  46: ('昭和ゲンコツで/王座奪取', [
-   ('ep46/46-1_genkotsu.png', 0.5, ['最後の一発', '昭和ゲンコツ！！']),
+   ('ep45/45-3_tame.png', 0.5, ['残り10秒', '最後の一発は……']),
+   ('VIDEO:video/fight/ep46_ko_edit.mp4', 0.5, ['', '昭和ゲンコツ！！', 'KO！！']),
    ('ep46/46-2_belt.png', 0.5, ['勝者', '権藤鉄男', '新王者、誕生']),
    ('ep46/46-3_akushu.png', 0.5, ['強ぇな、ジジイ', 'お前もな', 'また、やろうぜ'])]),
  47: ('王者になった夜、/ハルさんと', [
@@ -142,6 +142,20 @@ def render(n):
     out = fname(n); p = pipe(OUT + out); SEC = 6
     fr = None
     for si, (f, ax, lines) in enumerate(shots):
+        if f.startswith('VIDEO:'):
+            vp = '/home/claude/showa-tetsuo-media/' + f[6:]
+            raw = subprocess.run(['ffmpeg', '-v', 'error', '-i', vp, '-vf', f'fps={FPS},scale={W}:{H}:force_original_aspect_ratio=increase,crop={W}:{H}', '-f', 'rawvideo', '-pix_fmt', 'rgb24', '-'], capture_output=True).stdout
+            fs = W * H * 3; nfr = len(raw) // fs
+            for i in range(nfr):
+                fr = Image.frombytes('RGB', (W, H), raw[i * fs:(i + 1) * fs]).convert('RGBA')
+                if si == 0 and i < int(1.5 * FPS):
+                    big_title(fr, n); p.stdin.write(fr.convert('RGB').tobytes()); continue
+                fr.alpha_composite(band(n)); fr = fr.convert('RGB')
+                d = ImageDraw.Draw(fr)
+                shown = lines[:1 + min(len(lines) - 1, int(i / (nfr / len(lines))))]
+                subs(d, lines, shown)
+                p.stdin.write(fr.tobytes())
+            continue
         src = Image.open(P + f).convert('RGB')
         if ax == POSTER:
             img = src.resize((W, H)); b = img.tobytes()
